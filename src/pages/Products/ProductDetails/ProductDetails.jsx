@@ -1,21 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import bissaleImg from "../../../assets/img/bigsale/blog_1.jpg"
 import SectionTitle from '../../../components/SectionTitle/SectionTitle';
+import { useParams } from 'react-router-dom';
 const ProductDetails = () => {
+    const {id}=useParams();
+    // console.log(id);
+    const [products,setProduct]=useState('')
+    useEffect(()=>{
+        fetch(`http://localhost:5000/productDetails/${id}`)
+        .then(res=>res.json())
+        .then(data=>
+            setProduct(data)
+            // setLoading(false)
+           
+        )
+    },[])
+    // console.log(products);
     return (
         <div>
-            <div className='flex flex-row gap-5'>
-                <div className='w-8/12'>
+            <div className='flex flex-row gap-2'>
+                <div className='w-7/12'>
                     <img className='w-[600px] h-[400px]' src={bissaleImg} alt="" />
                 </div>
-                <div className='flex flex-col justify-center  space-y-3 w-4/12'>
-                    <h1 className='text-3xl'>Faded SkyBlu Denim Jeans</h1>
-                    <p className='text-3xl text-orange-400'>$269</p>
-                    <p>Category:Household</p>
+                <div className='flex flex-col justify-center text-justify  space-y-3 w-5/12'>
+                    <h1 className='text-3xl'>{products.name}</h1>
+                    <p className='text-3xl text-orange-400'>${products.price}</p>
+                    <p>Category:{products.category}</p>
                     <p>Availability: In Stock</p>
-                    <p>Mill Oil is an innovative oil filled radiator with the most modern technology.
-                        If you are looking for something that can make your interior look awesome,
-                        and at the same time give you the pleasant warm feeling during the winter.</p>
+                    <p>{products.description}</p>
                     <button className='btn btn-primary'>Add To Cart</button>
                 </div>
             </div>
