@@ -16,6 +16,7 @@ const NavBar = () => {
         </ul>
       </li>
       <li><Link to={'/products'}>Products</Link></li>
+      <li><Link to={'/cart'}>Cart</Link></li>
 
     </>
   return (
