@@ -2,32 +2,32 @@ import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../../Provider/AuthProvider';
 const SignUp = () => {
-    const {createUser,updateProfile}=useContext(AuthContext)
+    const { createUser, updateProfile } = useContext(AuthContext)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
-        const name=data.name;
-        const email=data.email;
-        const photo=data.photo;
-        const password=data.password;
-        createUser(name,email)
-        .then((result)=>{
-              console.log(result);
-        })
-        .catch(error=>{
-            console.error(error)
-        })
+        const name = data.name;
+        const email = data.email;
+        const photo = data.photo;
+        const password = data.password;
+        createUser(name, email)
+            .then((result) => {
+                console.log(result);
+            })
+            .catch(error => {
+                console.error(error)
+            })
 
     };
     return (
-        <div className="mx-auto w-full max-w-md space-y-4 rounded-lg border bg-white p-10 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
+        <div className="mx-auto w-full max-w-md space-y-4 my-20 rounded-lg border bg-white p-10 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
 
-            <h1 className="text-3xl font-semibold">Sign In</h1>
+            <h1 className="text-3xl font-semibold">Sign Up</h1>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
                 <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
 
-                    <label htmlFor="username_2" className="block font-medium">
+                    <label htmlFor="username_2" className="block font-medium text-left">
 
                         Name
 
@@ -36,7 +36,7 @@ const SignUp = () => {
                     <input
                         {...register("name", { required: true })}
                         aria-invalid={errors.name ? "true" : "false"}
-                        className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
+                        className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700 text-left"
 
                         id="username_2"
 
@@ -49,7 +49,7 @@ const SignUp = () => {
                     />
                     {errors.name?.type === 'required' && <p role="alert">Name is required</p>}
                 </div>
-                <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
+                <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300 text-left">
 
                     <label htmlFor="username_2" className="block font-medium">
 
@@ -77,7 +77,7 @@ const SignUp = () => {
                 </div>
 
                 <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
-                    <label htmlFor="password_2" className="block font-medium">
+                    <label htmlFor="password_2" className="block font-medium text-left">
 
                         Password
 

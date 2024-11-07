@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import bissaleImg from "../../../assets/img/bigsale/blog_1.jpg"
 import SectionTitle from '../../../components/SectionTitle/SectionTitle';
 import { useParams } from 'react-router-dom';
+import CartButton from '../../../components/CartButton/CartButton';
 const ProductDetails = () => {
     const {id}=useParams();
     // console.log(id);
@@ -28,7 +29,7 @@ const ProductDetails = () => {
                     <p>Category:{products.category}</p>
                     <p>Availability: In Stock</p>
                     <p>{products.description}</p>
-                    <button className='btn btn-primary'>Add To Cart</button>
+                    <CartButton id={products._id}></CartButton>
                 </div>
             </div>
             <SectionTitle heading={'Reviews'}></SectionTitle>

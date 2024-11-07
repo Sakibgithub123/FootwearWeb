@@ -1,7 +1,7 @@
 import {
     createBrowserRouter,
 } from "react-router-dom";
-import Main from "../Main/Main";
+
 import Home from "../pages/Home/Home/Home";
 import ProductDetails from "../pages/Products/ProductDetails/ProductDetails";
 import ProductBar from "../pages/AllProducts/ProductBar/ProductBar";
@@ -11,6 +11,11 @@ import Shop from "../pages/AllProducts/Shop/Shop";
 // import SignIn from "../pages/SignIn/SignIn";
 import SignUp from "../pages/Auth/SignUp/SignUp";
 import Login from "../pages/Auth/Login/Login";
+import Dashboard from "../Layouts/Dashboard/Dashboard";
+import Main from "../Layouts/Main/Main";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import ManageItems from "../pages/Dashboard/ManageItems/ManageItems";
+import Additems from "../pages/Dashboard/Additems/Additems";
 
 
 export const router = createBrowserRouter([
@@ -51,6 +56,26 @@ export const router = createBrowserRouter([
         
         ]
     },
+    {
+        path:'/dashboard',
+        element:<Dashboard></Dashboard>,
+        children:
+        [
+            {
+                path:'allUsers',
+                element:<AllUsers></AllUsers>
+            },
+            {
+                path:'addItems',
+                element:<Additems></Additems>
+            },
+            {
+                path:'manageitems',
+                element:<ManageItems></ManageItems>
+            }
+
+        ]
+    }
 ]);
 
 

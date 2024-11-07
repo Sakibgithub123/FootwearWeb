@@ -4,7 +4,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 
 import "../Navbar/Nav.css"
 const NavBar = () => {
-  const { user, signOut } = useContext(AuthContext)
+  const { user, logOut } = useContext(AuthContext)
 
   let from = location.state?.from?.pathname || '/';
 
@@ -13,6 +13,7 @@ const NavBar = () => {
       <li className="text-white"><NavLink to={'/'}>Home</NavLink></li>
       <li className="text-white"><NavLink to={'/shop'}>Shop</NavLink></li>
       <li className="text-white"><NavLink to={'/cart'}>Cart</NavLink></li>
+      <li className="text-white"><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
 
     </>
 
@@ -20,7 +21,7 @@ const NavBar = () => {
 
 
   const handleSignOut = () => {
-    signOut()
+    logOut()
       .then(() => { })
       .catch(error => {
         console.error(error)

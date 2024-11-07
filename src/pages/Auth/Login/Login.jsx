@@ -3,10 +3,10 @@ import { AuthContext } from '../../../Provider/AuthProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const { signInUser, googleLogin } = useContext(AuthContext)
+    const { signInUser, googleLogin,signOut } = useContext(AuthContext)
     const location = useLocation();
     const navigate = useNavigate();
-    let from = location.state?.from?.pathname || '/';
+    let from = location.state?.from?.pathname || "/";
 
 
     const handleLogin = (e) => {
@@ -48,15 +48,15 @@ const Login = () => {
 
     }
 return (
-    <div className="mx-auto w-full max-w-md space-y-4 rounded-lg border bg-white p-10 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
+    <div className="mx-auto w-full max-w-md space-y-4 my-20 rounded-lg border bg-white p-10 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
 
-        <h1 className="text-3xl font-semibold">Sign In</h1>
-
+        <h1 className="text-3xl font-semibold">Log In</h1>
+        {/* {errors && <p className="text-red-500">Error submitting form</p>} */}
         <form onSubmit={handleLogin} className="space-y-6">
 
             <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
 
-                <label htmlFor="username_2" className="block font-medium">
+                <label htmlFor="username_2" className="block font-medium text-left">
 
                     Email
 
@@ -80,7 +80,7 @@ return (
 
             <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
 
-                <label htmlFor="password_2" className="block font-medium">
+                <label htmlFor="password_2" className="block font-medium text-left">
 
                     Password
 
