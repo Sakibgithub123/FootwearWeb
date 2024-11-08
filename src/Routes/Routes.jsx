@@ -14,8 +14,10 @@ import Login from "../pages/Auth/Login/Login";
 import Dashboard from "../Layouts/Dashboard/Dashboard";
 import Main from "../Layouts/Main/Main";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
-import ManageItems from "../pages/Dashboard/ManageItems/ManageItems";
 import Additems from "../pages/Dashboard/Additems/Additems";
+import AddCategory from "../pages/Dashboard/ManageItems/AddCategory";
+import AddBrand from "../pages/Dashboard/ManageItems/AddBrand";
+import Allitem from "../pages/Dashboard/Allitem/Allitem";
 
 
 export const router = createBrowserRouter([
@@ -66,12 +68,20 @@ export const router = createBrowserRouter([
                 element:<AllUsers></AllUsers>
             },
             {
+                path:'allitems',
+                element:<Allitem></Allitem>
+            },
+            {
                 path:'addItems',
                 element:<Additems></Additems>
             },
             {
-                path:'manageitems',
-                element:<ManageItems></ManageItems>
+                path:'addCategory',
+                element:<AddCategory></AddCategory>
+            },
+            {
+                path:'addBrand',
+                element:<AddBrand></AddBrand>
             }
 
         ]

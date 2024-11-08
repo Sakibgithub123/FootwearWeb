@@ -7,27 +7,17 @@ import useAxiousSecure from "../../../hooks/useAxiousSecure";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import ProductEditButton from "../../../components/ProductEditButton/ProductEditButton";
+import useCategoryBrand from "../../../hooks/useCategoryBrand";
+import useAllProducts from "../../../hooks/useAllProducts";
 
 const Additems = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const axiousPublic = useAxiousPublic()
     const axiousSecure = useAxiousSecure()
+    const [category, brand] = useCategoryBrand()
+    const [products, refetch] = useAllProducts()
+    // console.log(products);
 
-    const [category, setCategory] = useState([]);
-    const [brand, setBrand] = useState([]);
-    useEffect(() => {
-        async function fetchData() {
-            const res = await axiousPublic.get('/getCategoryBrand')
-            const data = res.data
-            const [categoryData, brandData] = data
-            setCategory(categoryData)
-            setBrand(brandData)
-
-        }
-
-        fetchData()
-
-    }, [])
 
     const imageBBApiKey = import.meta.env.VITE_imageBB_api
     const imageUploadURL = `https://api.imgbb.com/1/upload?key=${imageBBApiKey}`
@@ -48,34 +38,29 @@ const Additems = () => {
                 brand: data.brand,
                 type: data.type,
                 status: data.status,
+                quantity: data.quantity,
                 description: data.description,
                 image: res.data.data.display_url,
 
             }
             const itemRes = await axiousSecure.post('/addItem', productInfo)
             if (itemRes.data.insertedId) {
+                refetch()
                 alert('Add Product success')
             }
         }
         console.log('with image url', res.data);
     }
 
-    const { data: products = [],refetch} = useQuery({
-        queryKey: ['products'],
-        queryFn: async () => {
-            const res = await axiousSecure.get('/products')
-            return res.data
-        }
-    })
-    console.log(products);
-    const handleDelete=(id,name)=>{
+    // console.log(products);
+    const handleDelete = (id, name) => {
         axiousSecure.delete(`/product/${id}`)
-        .then(res=>{
-            if(res.data.deletedCount > 0){
-                refetch()
-                alert('delete product success')
-            }
-        })
+            .then(res => {
+                if (res.data.deletedCount > 0) {
+                    refetch()
+                    alert('delete product success')
+                }
+            })
     }
     return (
         <div>
@@ -94,9 +79,7 @@ const Additems = () => {
                             <input
                                 {...register('name', { required: true })}
                                 className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
-                                id="name"
                                 placeholder="Product Name"
-                                name="name"
                                 type="text"
                             />
                             {errors.name?.type === "required" && (<p role="alert">Name is required</p>)}
@@ -110,9 +93,7 @@ const Additems = () => {
                                 <input
                                     {...register('price', { required: true })}
                                     className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
-                                    id="price"
                                     placeholder="Enter Price"
-                                    name="price"
                                     type="number"
                                 />
                                 {errors.price?.type === "required" && (<p role="alert">Price is required</p>)}
@@ -123,19 +104,17 @@ const Additems = () => {
                                     Category
                                 </label>
                                 <select
-                                    {...register('category', { required: true })}
-                                    defaultValue="default"
+                                    {...register('category', { required: true, validate: value => value !== 'default' || "Please select a category" })}
                                     className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
-                                    id="category"
-                                    name="category"
+                                    defaultValue='default'
                                 >
-                                    <option value="default">Select Category</option>
+                                    <option disabled value='default'>Select Category</option>
                                     {
                                         category.map(categories =>
                                             <option key={categories._id} value="Mens">{categories.category}</option>
                                         )}
                                 </select>
-                                {errors.category?.type === "required" && (<p role="alert">Category is required</p>)}
+                                {errors.category && (<p role="alert">{errors.category.message}</p>)}
 
                             </div>
 
@@ -146,13 +125,13 @@ const Additems = () => {
                                     Color
                                 </label>
                                 <select
-                                    {...register('color', { required: true })}
-                                    defaultValue="default"
+                                    {...register('color', { required: true, validate: value => value !== 'default' || "Please select a color" })}
                                     className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
                                     id="color"
                                     name="color"
+                                    defaultValue='default'
                                 >
-                                    <option value="default">Select color</option>
+                                    <option disabled value={'default'}>Select color</option>
                                     <option value="Red">Red</option>
                                     <option value="Green">Green</option>
                                     <option value="Yellow">Yellow</option>
@@ -164,7 +143,7 @@ const Additems = () => {
                                     <option value="Pink">Pink</option>
                                     <option value="Brown">Brown</option>
                                 </select>
-                                {errors.color?.type === "required" && (<p role="alert">Color is required</p>)}
+                                {errors.color && (<p role="alert">{errors.color.message}</p>)}
 
                             </div>
                             <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-400 flex-1">
@@ -172,19 +151,17 @@ const Additems = () => {
                                     Brand
                                 </label>
                                 <select
-                                    {...register('brand', { required: true })}
-                                    defaultValue="default"
+                                    {...register('brand', { required: true, validate: value => value !== 'default' || "Please select a brand" })}
                                     className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
-                                    id="brand"
-                                    name="brand"
+                                    defaultValue={'default'}
                                 >
-                                    <option value="default">Select brand</option>
+                                    <option disabled value={'default'}>Select brand</option>
                                     {
                                         brand.map(brands =>
                                             <option key={brands._id} value={brands.brand}>{brands.brand}</option>
                                         )}
                                 </select>
-                                {errors.brand?.type === "required" && (<p role="alert">Brand name is required</p>)}
+                                {errors.brand && (<p role="alert">{errors.brand.message}</p>)}
                             </div>
 
                         </div>
@@ -194,13 +171,11 @@ const Additems = () => {
                                     Type
                                 </label>
                                 <select
-                                    {...register('type', { required: true })}
-                                    defaultValue="default"
+                                    {...register('type', { required: true, validate: value => value !== 'default' || "Please select a type" })}
                                     className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
-                                    id="type"
-                                    name="type"
+                                    defaultValue={'default'}
                                 >
-                                    <option value="default">Select Type</option>
+                                    <option disabled value={'default'}>Select Type</option>
                                     <option value="Running">Running</option>
                                     <option value="Hiking">Hiking</option>
                                     <option value="Sneakers">Sneakers</option>
@@ -210,28 +185,37 @@ const Additems = () => {
                                     <option value="Skateboarding">Skateboarding</option>
                                     <option value="Basketball">Basketball</option>
                                 </select>
-                                {errors.type?.type === "required" && (<p role="alert">Type is required</p>)}
+                                {errors.type && (<p role="alert">{errors.type.message}</p>)}
                             </div>
                             <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-400 flex-1">
                                 <label className="block font-medium text-left" htmlFor="category">
                                     Status
                                 </label>
                                 <select
-                                    {...register('status', { required: true })}
-                                    defaultValue="default"
+                                    {...register('status', { required: true, validate: value => value !== 'default' || "Please select a status" })}
                                     className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
-                                    id="status"
-                                    name="status"
+                                    defaultValue={'default'}
                                 >
-                                    <option value="default">Select Status</option>
+                                    <option disabled value={'default'}>Select Status</option>
                                     <option value="Trending">Trending</option>
                                     <option value="Popular">Popular</option>
                                     <option value="Latest">Latest</option>
                                     <option value="Top Seller">Top Seller</option>
                                 </select>
-                                {errors.status?.type === "required" && (<p role="alert">Status is required</p>)}
+                                {errors.status && (<p role="alert">{errors.status.message}</p>)}
                             </div>
-
+                        </div>
+                        <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-400">
+                            <label className="block font-medium text-left" htmlFor="price">
+                                Available Quantity
+                            </label>
+                            <input
+                                {...register('quantity', { required: true })}
+                                className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
+                                placeholder="Enter Quantity"
+                                type="number"
+                            />
+                            {errors.quantity?.type === "required" && (<p role="alert">Quantity is required</p>)}
                         </div>
                         <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-400">
                             <label className="block font-medium text-left" htmlFor="_description">
@@ -279,8 +263,8 @@ const Additems = () => {
                     </thead>
                     <tbody>
                         {
-                            products.map((product,index) => 
-                                <tr key={index} className="hover:bg-gray-50 border-b transition duration-300">
+                            products.map((product) =>
+                                <tr key={product._id} className="hover:bg-gray-50 border-b transition duration-300">
                                     <td className="py-4 px-3 flex justify-start">
                                         <img src={product.image} alt="image" className="h-16 w-16 object-cover bg-gray-300" />
                                     </td>
@@ -293,9 +277,9 @@ const Additems = () => {
                                     <td className="py-2 px-3  border-b text-sm font-medium">{product.status}</td>
                                     <td className="py-2 px-3  border-b text-sm font-medium">{product.description}</td>
                                     <td className=" flex gap-1 justify-center items-center">
-                                      <ProductEditButton></ProductEditButton>
-                                        <button onClick={()=>handleDelete(product._id,product.name)} className="bg-red-500 hover:scale-110 scale-100 transition-all duration-100 text-white py-1 px-1 rounded-md"><MdDeleteForever /></button>
-                                       
+                                        <ProductEditButton id={product._id} refetch={refetch} />
+                                        <button onClick={() => handleDelete(product._id, product.name)} className="bg-red-500 hover:scale-110 scale-100 transition-all duration-100 text-white py-1 px-1 rounded-md"><MdDeleteForever /></button>
+
                                     </td>
                                 </tr>
                             )
