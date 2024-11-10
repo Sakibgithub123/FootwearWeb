@@ -8,6 +8,7 @@ const Cart = () => {
     const [cart, setCartData] = useState([]); // Initialize cart as an empty array
     const [quantities, setQuantities] = useState([]); // Initialize quantities array
     const email = user?.email;
+    // console.log(email);
     
     useEffect(() => {
         if (email) { // Ensure email is defined before making the fetch request

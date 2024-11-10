@@ -18,6 +18,12 @@ import Additems from "../pages/Dashboard/Additems/Additems";
 import AddCategory from "../pages/Dashboard/ManageItems/AddCategory";
 import AddBrand from "../pages/Dashboard/ManageItems/AddBrand";
 import Allitem from "../pages/Dashboard/Allitem/Allitem";
+import AdninDashboard from "../pages/Dashboard/Dashboard/AdninDashboard";
+import OrderList from "../pages/Dashboard/Order/OrderList/OrderList";
+import OrderInvoices from "../pages/Dashboard/Order/OrderInvoices/OrderInvoices";
+import OrderDetails from "../pages/Dashboard/Order/OrderDetails/OrderDetails";
+import InVoices from "../pages/Dashboard/InVoices/InVoices";
+import EmailInvoices from "../pages/Dashboard/InVoices/EmailInvoices";
 
 
 export const router = createBrowserRouter([
@@ -64,6 +70,10 @@ export const router = createBrowserRouter([
         children:
         [
             {
+                path:'adminAashboard',
+                element:<AdninDashboard></AdninDashboard>
+            },
+            {
                 path:'allUsers',
                 element:<AllUsers></AllUsers>
             },
@@ -82,7 +92,27 @@ export const router = createBrowserRouter([
             {
                 path:'addBrand',
                 element:<AddBrand></AddBrand>
-            }
+            },
+            {
+                path:'orderList',
+                element:<OrderList></OrderList>
+            },
+            {
+                path:'orderInvoices',
+                element:<OrderInvoices></OrderInvoices>
+            },
+            {
+                path:'orderDetails/:id',
+                element:<OrderDetails></OrderDetails>
+            },
+            {
+                path:'invoices',
+                element:<InVoices></InVoices>
+            },
+            {
+                path:'emailInvoices',
+                element:<EmailInvoices></EmailInvoices>
+            },
 
         ]
     }

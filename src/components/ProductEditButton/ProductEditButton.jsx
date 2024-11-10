@@ -68,7 +68,7 @@ const ProductEditButton = ({ id, refetch }) => {
             <input id={`my-drawer-${id}`} type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
                 {/* Page content here */}
-                <button onClick={() => handleEdit(id)} className="bg-blue-500  hover:scale-110 scale-100 transition-all duration-100 text-white py-1 px-1 rounded-md">
+                <button onClick={() => handleEdit(id)} className="bg-orange-500  hover:scale-110 scale-100 transition-all duration-100 text-white py-1 px-1 rounded-md">
                     <label htmlFor={`my-drawer-${id}`} ><FaEdit /></label>
                 </button>
             </div>
@@ -77,8 +77,8 @@ const ProductEditButton = ({ id, refetch }) => {
                 <ul className="menu bg-base-200 text-base-content min-h-full max-w-md p-4 overflow-y-auto">
                     {/* Sidebar content here */}
                     <div className="mb-2">
-                        <h2 className="text-center text-xl font-semibold tracking-tight">Update {editProductData.name} Item</h2>
-                        <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">We&apos;d love to hear from you!</p>
+                        <h2 className="text-center text-xl text-orange-500 font-semibold tracking-tight">Update {editProductData.name} Item</h2>
+                        <p className="text-center text-sm text-orange-200 text-zinc-500 dark:text-zinc-400">We&apos;d love to hear from you!</p>
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-3 h-[400px]">
                         <div className="space-y-1 text-sm text-zinc-700 dark:text-zinc-400">
@@ -225,7 +225,7 @@ const ProductEditButton = ({ id, refetch }) => {
                             {errors.image?.type === "required" && (<p role="alert">Image is required</p>)}
                         </div>
                         <div className='py-1'>
-                            <input type="submit" className="rounded-md bg-sky-500 px-3 py-1  text-white transition-colors hover:bg-sky-600 dark:bg-sky-700" value={'UPDATE'} />
+                            <input type="submit" className="rounded-md bg-orange-500 px-3 py-1  text-white transition-colors hover:bg-sky-600 dark:bg-sky-700" value={'UPDATE'} />
                         </div>
                     </form>
                 </ul>

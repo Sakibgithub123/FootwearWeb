@@ -5,16 +5,21 @@ import useAxiousSecure from '../../../hooks/useAxiousSecure';
 import ProductEditButton from '../../../components/ProductEditButton/ProductEditButton';
 import SectionTitle from '../../../components/SectionTitle/SectionTitle';
 import { useForm } from "react-hook-form";
+import { MdOutlineDateRange } from "react-icons/md";
+import useCategoryBrand from '../../../hooks/useCategoryBrand';
 const Allitem = () => {
     const [products, refetch] = useAllProducts()
-    const [filterProducts, setFilterProducts] = useState([])
+    const [filterProducts, setFilterProducts] = useState(0)
     const axiousSecure = useAxiousSecure()
+    const [category, brand] = useCategoryBrand()
+    console.log(category, brand);
     const { register, handleSubmit, formState: { errors } } = useForm(
         {
             defaultValues: {
                 name: "",
-                category: "",
-                color: "",  // Set default to empty so "Select Type" is not a valid selection
+                minprice: "",
+                maxprice: "",
+                category: "",  // Set default to empty so "Select Type" is not a valid selection
                 type: "",
                 status: "",
                 brand: "",
@@ -22,44 +27,26 @@ const Allitem = () => {
             }
         },
     );
-    //filter
-    // const onSubmit = async (data) => {
-    //     const { name, category, brand, color, type, status } = data;
-
-
-    //         // Send GET request with query parameters
-    //         const response = await axiousSecure(`/filter?name=${name}&category=${category}&brand=${brand}&color=${color}&type=${type}&status=${status}`)
-    //         console.log(response.data);
-
-    // };
+    //filters
     const onSubmit = async (data) => {
         console.log(data);
-        const { name, category, brand, color, type, status } = data;
+        const { name, minprice, maxprice, category, brand, color, type, status } = data;
         // Define only parameters with truthy values
         const queryParams = {};
         if (name) queryParams.name = name;
+        if (minprice) queryParams.minprice = minprice;
+        if (maxprice) queryParams.maxprice = maxprice;
         if (category) queryParams.category = category;
         if (type) queryParams.type = type;
         if (status) queryParams.status = status;
         if (brand) queryParams.brand = brand;
         if (color) queryParams.color = color;
-
-
         try {
-            const response = await axiousSecure(`/filter?name=${name}&category=${category}&type=${type}&status=${status}&brand=${brand}&color=${color}`
-                //     , {
-                //     params: {
-                //         name,
-                //         category,
-                //         brand,
-                //         color,
-                //         type,
-                //         status
-                //     }
-                // }
+            const response = await axiousSecure(`/filter?name=${name}&minprice=${minprice}&maxprice=${maxprice}&category=${category}&type=${type}&status=${status}&brand=${brand}&color=${color}`
+
             );
-            // const response = await axiousSecure.get('/filter', { params: queryParams });
             console.log(response.data);
+            // setFilterProducts(response.data);
             if (response.data.length === 0) {
                 setFilterProducts([]); // Set to empty array if no results
             } else {
@@ -87,9 +74,9 @@ const Allitem = () => {
         <div>
             <SectionTitle heading={'All Items'}></SectionTitle>
             <div>
-                <div className="mb-6">
-                    <h2 className="text-center text-3xl font-semibold tracking-tight">Filter Products</h2>
-                    <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">We&apos;d love to hear from you!</p>
+                <div className="mb-6 bg-base-200 p-4 ml-3">
+                    <h2 className="text-center text-3xl font-semibold tracking-tight text-orange-300">Filter Products</h2>
+                    <p className="text-center text-sm text-zinc-500 dark:text-zinc-400 mb-4">We&apos;d love to hear from you!</p>
                     <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-6">
                         <div className='flex flex-row space-x-4 justify-center'>
                             <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-400">
@@ -98,23 +85,50 @@ const Allitem = () => {
                                 </label>
                                 <input
                                     className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
-                                    placeholder="Enter product name"
+                                    placeholder="Filter By Name"
                                     {...register('name')}
                                     type="text"
                                 />
                             </div>
                             <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-400">
+                                <label className="block font-medium" htmlFor="name">
+                                    Price
+                                </label>
+                                <div className="h-10 w-full flex flex-row bg-white  items-center rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700">
+                                    <input
+                                        className='border-0 outline-0'
+                                        placeholder="Filter By MinPrice"
+                                        {...register('minprice')}
+                                        type="text"
+                                    />
+                                    <MdOutlineDateRange />
+                                    <input
+                                        className='border-0 outline-0 pl-10'
+                                        placeholder="Filter By MaxPrice"
+                                        {...register('maxprice')}
+                                        type="text"
+                                    />
+
+                                </div>
+                            </div>
+                            <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-400">
                                 <label className="block font-medium" htmlFor="_email">
                                     Category
                                 </label>
-                                <input
-                                    className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
-                                    id="category"
-                                    placeholder="Enter category"
+                                <select
                                     {...register('category')}
-                                    type="text"
-                                />
+                                    className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
+                                >
+                                    <option disabled value="" >Filter By Category</option>
+                                    {
+                                        category.map((item, index) =>
+                                            <option key={index} value={item.category}>{item.category}</option>
+                                        )
+                                    }
+                                </select>
                             </div>
+                        </div>
+                        <div className='flex flex-row space-x-4 justify-center'>
                             <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-400 ">
                                 <label className="block font-medium " htmlFor="category">
                                     Type
@@ -122,9 +136,8 @@ const Allitem = () => {
                                 <select
                                     {...register('type')}
                                     className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
-
                                 >
-                                    <option disabled value="">Select Type</option>
+                                    <option disabled value="">Filter By Type</option>
                                     <option value="Running">Running</option>
                                     <option value="Hiking">Hiking</option>
                                     <option value="Sneakers">Sneakers</option>
@@ -143,40 +156,40 @@ const Allitem = () => {
                                 <select
                                     {...register('status')}
                                     className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
-
                                 >
-                                    <option disabled value="" >Select Status</option>
+                                    <option disabled value="" >Filter By Status</option>
                                     <option value="Trending">Trending</option>
                                     <option value="Popular">Popular</option>
                                     <option value="Latest">Latest</option>
                                     <option value="Top Seller">Top Seller</option>
                                 </select>
                             </div>
-                        </div>
-                        <div className='flex flex-row space-x-4 justify-center'>
                             <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-400">
                                 <label className="block font-medium" htmlFor="_email">
                                     Brand
                                 </label>
-                                <input
-                                    className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
-                                    id="brand"
-                                    placeholder="Enter brand"
+                                <select
                                     {...register('brand')}
-                                    type="text"
-                                />
+                                    className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
+                                >
+                                    <option disabled value="" >Filter By Brand</option>
+                                    {
+                                        brand.map((item, index) =>
+                                            <option key={index} value={item.brand}>{item.brand}</option>
+                                        )
+                                    }
+                                </select>
                             </div>
                             <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-400 ">
                                 <label className="block font-medium " htmlFor="color">
                                     Color
                                 </label>
                                 <select
-
                                     className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
                                     id="color"
                                     {...register('color')}
                                 >
-                                    <option disabled value="">Select color</option>
+                                    <option disabled value="">Filter By Color</option>
                                     <option value="Red">Red</option>
                                     <option value="Green">Green</option>
                                     <option value="Yellow">Yellow</option>
@@ -190,45 +203,49 @@ const Allitem = () => {
                                 </select>
                             </div>
                         </div>
-                        <button className="rounded-md bg-sky-500 px-4 py-2 text-white transition-colors hover:bg-sky-600 dark:bg-sky-700">Filter</button>
+                        <button className="rounded-md bg-orange-500 px-4 py-2 text-white transition-colors hover:bg-sky-600 dark:bg-sky-700">Filter</button>
                     </form>
                 </div>
             </div>
-            <div className="overflow-x-auto ">
+            <div className="overflow-x-auto bg-base-200 p-4 mt-4 ml-3">
+                <h1 className='text-left text-stone-950 p-2 text-2xl font-bold border   border-b-base-200 border-t-0'>All Items List</h1>
+                {/* <table className="max-w-[90%]shadow-md border mx-auto border-gray-100 my-6"> */}
                 <table className="min-w-[90%] shadow-md  border mx-auto border-gray-100  my-6">
                     <thead>
-                        <tr className="bg-[#333333] text-white">
-                            <th className="py-4 px-6  border-b">#</th>
-                            <th className="py-4 px-6  border-b">Name</th>
-                            <th className="py-4 px-6  border-b">Image</th>
-                            <th className="py-4 px-6  border-b">Quantity</th>
-                            <th className="py-4 px-6  border-b text-end">Action</th>
+                        <tr className="bg-orange-400 text-center text-white">
+                            <th className="py-2 px-3  text-sm  border-b text-sm">#</th>
+                            <th className="py-2 px-3  text-sm  border-b text-sm">NAME</th>
+                            <th className="py-2 px-3  text-sm  border-b">IMAGE</th>
+                            <th className="py-2 px-3  text-sm  border-b text-sm">PRICE</th>
+                            <th className="py-2 px-3  text-sm  border-b text-sm">QUANTITY</th>
+                            <th className="py-2 px-3  text-sm  border-b text-sm text-end">ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             // Show "No products available" if the products array is empty and filterProducts is also empty
-                            (products.length === 0 && filterProducts.length === 0) ? (
+                            (products.length === 0) ? (
                                 <tr>
-                                    <td colSpan="5" className="py-4 px-6 text-center">No products available</td>
+                                    <td colSpan="5" className="py-2 px-3  text-center">No products available</td>
                                 </tr>
                             ) : (
                                 // If the filterProducts array is empty, show "No products found for the filter"
                                 filterProducts.length === 0 ? (
                                     <tr>
-                                        <td colSpan="5" className="py-4 px-6 text-center">No products found for the filter</td>
+                                        <td colSpan="5" className="py-2 px-3  text-center">No products found for the filter</td>
                                     </tr>
                                 ) : (
                                     // If there are products in either array, display them
                                     (filterProducts.length > 0 ? filterProducts : products).map((item, index) => (
-                                        <tr key={item._id} className="hover:bg-gray-50 transition duration-300">
-                                            <td className="py-4 px-6 border-b">{index + 1}</td>
-                                            <td className="py-4 px-6 border-b">{item.name}</td>
-                                            <td className="py-4 px-3 flex justify-start">
-                                                <img src={item.image} alt="image" className="h-16 w-16 object-cover bg-gray-300" />
+                                        <tr key={index} className="hover:bg-gray-50 transition duration-300">
+                                            <td className="py-2 px-3    border-b text-sm font-bold">{index + 1}</td>
+                                            <td className="py-2 px-3    border-b text-sm font-bold">{item.name}</td>
+                                            <td className="py-2 px-3    border-b">
+                                                <img src={item.image} alt="image" className="h-12 w-12 object-cover bg-gray-300 rounded" />
                                             </td>
-                                            <td className="py-4 px-6 border-b">{item.quantity}</td>
-                                            <td className="py-4 px-6 border-b text-end">
+                                            <td className="py-2 px-3    border-b text-sm font-bold">${item.price}</td>
+                                            <td className="py-2 px-3    border-b text-sm font-bold">{item.quantity}</td>
+                                            <td className="py-2 px-3    border-b text-sm space-y-2 text-end">
                                                 <ProductEditButton id={item._id} refetch={refetch} />
                                                 <button
                                                     onClick={() => handleDelete(item._id, item.name)}
