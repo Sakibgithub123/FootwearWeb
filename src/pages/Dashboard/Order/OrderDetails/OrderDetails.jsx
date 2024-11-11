@@ -11,7 +11,7 @@ const OrderDetails = () => {
     console.log(id);
     const axiousSecure = useAxiousSecure()
     useEffect(() => {
-        axiousSecure.get(`orderDetails/${cusId}`)
+        axiousSecure.get(`/orderDetails/${cusId}`)
             .then(res =>
                 setOrderDetails(res.data)
             )

@@ -11,6 +11,9 @@ const ProductEditButton = ({ id, refetch }) => {
     const [editProductData, setEditProductData] = useState('');
     const axiousPublic = useAxiousPublic()
     const axiousSecure = useAxiousSecure()
+    useEffect(()=>{
+        // console.log(id);
+    },[id])
 
 
     const handleEdit = async (id) => {
@@ -64,7 +67,8 @@ const ProductEditButton = ({ id, refetch }) => {
     }
 
     return (
-        <div className="drawer drawer-end">
+        <div>
+            <div className="drawer drawer-end">
             <input id={`my-drawer-${id}`} type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
                 {/* Page content here */}
@@ -230,6 +234,7 @@ const ProductEditButton = ({ id, refetch }) => {
                     </form>
                 </ul>
             </div>
+        </div>
         </div>
     );
 };

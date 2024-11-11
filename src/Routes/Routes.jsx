@@ -106,11 +106,11 @@ export const router = createBrowserRouter([
                 element:<OrderDetails></OrderDetails>
             },
             {
-                path:'invoices',
+                path:'invoices/:id',
                 element:<InVoices></InVoices>
             },
             {
-                path:'emailInvoices',
+                path:'emailInvoices/:id',
                 element:<EmailInvoices></EmailInvoices>
             },
 

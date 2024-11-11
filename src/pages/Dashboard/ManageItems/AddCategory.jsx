@@ -3,14 +3,15 @@ import useAxiousSecure from "../../../hooks/useAxiousSecure";
 import useCategoryBrand from "../../../hooks/useCategoryBrand";
 import { MdDeleteForever } from "react-icons/md";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import CategoryModal from "../../../components/Modal/CategoryModal";
 
 const AddCategory = () => {
-    const { register, handleSubmit, formState: { errors }, } = useForm()
+    const { register, handleSubmit, formState: { errors }, } = useForm({defaultValues:{status:""}})
     const axiousSecure = useAxiousSecure()
     const [category] = useCategoryBrand()
     // console.log(category);
     const onSubmit = async (data) => {
-        const categoryName = { category: data.category }
+        const categoryName = { category: data.category,status:data.status }
         const res = await axiousSecure.post('/addCategory', categoryName)
         if (res.data.insertedId) {
             alert('Category added')
@@ -50,9 +51,10 @@ const AddCategory = () => {
                                 Status
                             </label>
                             <select
-                            {...register('status', { required: true })}
-                            className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
+                                {...register('status', { required: true })}
+                                className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
                             >
+                                <option disabled value="">Select Status</option>
                                 <option value="Published">Published</option>
                                 <option value="Scheduled">Scheduled</option>
                                 <option value="Hidden">Hidden</option>
@@ -76,12 +78,21 @@ const AddCategory = () => {
                     </thead>
                     <tbody>
                         {
-                            category.map((categories, index) => 
+                            category.map((categories, index) =>
                                 <tr key={index} className="hover:bg-gray-50 transition duration-300">
                                     <td className="py-2 px-3  border-b text-sm font-bold">{index} </td>
                                     <td className="py-2 px-3  border-b text-sm font-bold">{categories.category}</td>
-                                    <td className="py-2 px-3  border-b text-end">
+                                    <td className="py-2 px-3 border-b text-sm font-bold">
+                                        <span className={`py-1 px-2 rounded-lg text-white ${categories.status === 'Scheduled' ? 'bg-yellow-500' :
+                                                categories.status === 'Published' ? 'bg-green-900' :
+                                                    'bg-rose-900'
+                                            }`}>
+                                            {categories.status}
+                                        </span>
+                                    </td>
+                                    <td className="py-2 px-3 flex justify-end border-b text-end space-x-1">
                                         <button onClick={() => handleDelete(categories._id, categories.category)} className="bg-red-500 hover:scale-110 scale-100 transition-all duration-100 text-white py-1 px-1 rounded-md"><MdDeleteForever /></button>
+                                        <CategoryModal id={categories._id} />
                                     </td>
                                 </tr>
                             )

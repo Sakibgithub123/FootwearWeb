@@ -3,14 +3,17 @@ import useAxiousSecure from "../../../hooks/useAxiousSecure";
 import useCategoryBrand from "../../../hooks/useCategoryBrand";
 import { MdDeleteForever } from "react-icons/md";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import { FaEdit } from "react-icons/fa";
+import BrandModal from "../../../components/Modal/BrandModal";
+// import CategoryBrandModal from "../../../components/Modal/BrandModal";
 
 const AddBrand = () => {
-    const { register, handleSubmit, formState: { errors }, } = useForm()
+    const { register, handleSubmit, formState: { errors }, } = useForm({ defaultValues: { status: "" } })
     const axiousSecure = useAxiousSecure()
-    const [,brand] = useCategoryBrand()
+    const [, brand] = useCategoryBrand()
     // console.log(brand);
     const onSubmit = async (data) => {
-        const brandName = { brand: data.brand }
+        const brandName = { brand: data.brand,status:data.status }
         const res = await axiousSecure.post('/addBrand', brandName)
         if (res.data.insertedId) {
             alert('Brand added')
@@ -51,9 +54,10 @@ const AddBrand = () => {
                                 Status
                             </label>
                             <select
-                            {...register('status', { required: true })}
-                            className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
+                                {...register('status', { required: true })}
+                                className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
                             >
+                                <option disabled value="">Select Status</option>
                                 <option value="Published">Published</option>
                                 <option value="Scheduled">Scheduled</option>
                                 <option value="Hidden">Hidden</option>
@@ -81,8 +85,17 @@ const AddBrand = () => {
                                 <tr key={index} className="hover:bg-gray-50 transition duration-300">
                                     <td className="py-2 px-3  border-b text-sm font-bold">{index} </td>
                                     <td className="py-2 px-3  border-b text-sm font-bold">{brands.brand}</td>
-                                    <td className="py-2 px-3  border-b text-end">
+                                    <td className="py-2 px-3 border-b text-sm font-bold">
+                                        <span className={`py-1 px-2 rounded-lg text-white ${brands.status === 'Scheduled' ? 'bg-yellow-500' :
+                                            brands.status === 'Published' ? 'bg-green-900' :
+                                                'bg-rose-900'
+                                            }`}>
+                                            {brands.status}
+                                        </span>
+                                    </td>
+                                    <td className="py-2 px-3 flex justify-end border-b text-end space-x-1">
                                         <button onClick={() => handleDelete(brands._id, brands.brand)} className="bg-red-500 hover:scale-110 scale-100 transition-all duration-100 text-white py-1 px-1 rounded-md"><MdDeleteForever /></button>
+                                        <BrandModal id={brands._id} />
                                     </td>
                                 </tr>
                             )
@@ -90,6 +103,8 @@ const AddBrand = () => {
                     </tbody>
                 </table>
             </div>
+            {/* modal  */}
+
 
         </div>
     );

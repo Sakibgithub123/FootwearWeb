@@ -51,31 +51,31 @@ const OrderList = () => {
                         </tr>
                         {
                             orders.map((item, index) =>
-                                <tr className="hover:bg-gray-50 border-b transition duration-300">
+                                <tr key={index} className="hover:bg-gray-50 border-b transition duration-300">
                                     <td className="py-4 px-6 border-b text-sm font-bold">{item.orderId}</td>
                                     <td>
-                                        <div className="flex items-center gap-3">
-                                            <div className="avatar">
-                                                <div className="mask mask-squircle h-12 w-12">
-                                                    <img
-                                                        src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                                                        alt="Avatar Tailwind CSS Component" />
-                                                </div>
-                                            </div>
-                                            <div>
-                                                {/* <div className="font-bold">{item.name}</div> */}
-                                                {
-                                                    item.cart.map((carts, index) =>
+                                        {
+                                            item.cart.map((carts, index) =>
+                                                <div key={index} className="flex items-center gap-1">
+                                                    <div className="avatar">
+                                                        <div className={`mask mask-squircle  ${index < item.cart.length?'h-6 w-6 my-1':'h-12 w-12'}`}>
+                                                            <img
+                                                                src="https://img.daisyui.com/images/profile/demo/2@94.webp"
+                                                                alt="Avatar Tailwind CSS Component" />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        {/* <div className="font-bold">{item.name}</div> */}
                                                         <div className="text-sm opacity-50">{carts.name}{index < item.cart.length - 1 ? ',' : ''}</div>
-                                                    )
-                                                }
-                                            </div>
-                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
                                     </td>
                                     <td className="py-4 px-6 border-b text-sm font-bold">{item.name}</td>
                                     <td className="py-4 px-6 border-b text-sm font-bold">Bank Emi</td>
                                     <td className="py-4 px-6 border-b text-sm font-bold">${item.totalPrice}</td>
-                                    <td className="py-4 px-6 border-b text-sm font-bold"><span className={`text-white rounded-lg py-1 px-2 ${item.status==='Progress'?'bg-yellow-500':'bg-rose-900'} ${item.status==='Complited'?'bg-green-900':'bg-rose-900'}`}>{item.status}</span></td>
+                                    <td className="py-4 px-6 border-b text-sm font-bold"><span className={`text-white rounded-lg py-1 px-2 ${item.status === 'Progress' ? 'bg-yellow-500' : 'bg-rose-900'} ${item.status === 'Complited' ? 'bg-green-900' : 'bg-rose-900'}`}>{item.status}</span></td>
                                     <td className="py-4 px-6 border-b text-end">
                                         <Link to={`/dashboard/orderDetails/${item._id}`}>
                                             <button className="bg-orange-500 hover:scale-110 scale-100 transition-all duration-100 text-white py-2 px-4 rounded-md">Details</button>

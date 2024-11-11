@@ -12,7 +12,7 @@ const Allitem = () => {
     const [filterProducts, setFilterProducts] = useState(0)
     const axiousSecure = useAxiousSecure()
     const [category, brand] = useCategoryBrand()
-    console.log(category, brand);
+    // console.log(category, brand);
     const { register, handleSubmit, formState: { errors } } = useForm(
         {
             defaultValues: {
@@ -245,7 +245,7 @@ const Allitem = () => {
                                             </td>
                                             <td className="py-2 px-3    border-b text-sm font-bold">${item.price}</td>
                                             <td className="py-2 px-3    border-b text-sm font-bold">{item.quantity}</td>
-                                            <td className="py-2 px-3    border-b text-sm space-y-2 text-end">
+                                            <td className="py-2 px-3 border-b text-sm space-y-2 text-end">
                                                 <ProductEditButton id={item._id} refetch={refetch} />
                                                 <button
                                                     onClick={() => handleDelete(item._id, item.name)}

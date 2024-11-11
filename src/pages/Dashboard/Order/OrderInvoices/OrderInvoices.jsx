@@ -56,11 +56,11 @@ const OrderInvoices = () => {
                                     {/* <td className="py-4 px-6 border-b text-sm font-bold">Dianalove</td> */}
                                     <td className="py-4 px-6 border-b text-sm font-bold">{item.name}</td>
                                     <td className="py-4 px-6 border-b text-end">
-                                        <Link to='/dashboard/invoices'>
+                                        <Link to={`/dashboard/invoices/${item._id}`}>
                                             <button className="hover:scale-110 scale-100 transition-all duration-100 text-stone-950 py-2 px-4 rounded-md"><BsFillPrinterFill /></button>
                                         </Link>
                                         <button className="hover:scale-110 scale-100 transition-all duration-100 text-stone-950 py-2 px-4 rounded-md"><MdOutlineFileDownload /></button>
-                                        <Link to='/dashboard/emailInvoices'>
+                                        <Link to={`/dashboard/emailInvoices/${item._id}`}>
                                             <button className="hover:scale-110 scale-100 transition-all duration-100 text-stone-950 py-2 px-4 rounded-md"><MdMarkEmailUnread /></button>
                                         </Link>
                                     </td>
