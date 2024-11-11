@@ -143,10 +143,10 @@ const OrderDetails = () => {
                     <table className="min-w-[90%] shadow-md border mx-auto border-gray-100 mt-6">
                         <thead>
                             <tr className="bg-orange-400 text-white">
-                                <th className="py-4 px-6 text-sm text-left border-b">PRODUCT IMAGE</th>
-                                <th className="py-4 px-6 text-sm text-left border-b">PRODUCT NAME</th>
-                                <th className="py-4 px-6 text-sm text-left border-b">QUANTITY</th>
-                                <th className="py-4 px-6 text-sm text-left border-b">PRICE</th>
+                                <th className="py-4 px-6 text-sm  border-b">PRODUCT IMAGE</th>
+                                <th className="py-4 px-6 text-sm  border-b">PRODUCT NAME</th>
+                                <th className="py-4 px-6 text-sm  border-b">QUANTITY</th>
+                                <th className="py-4 px-6 text-sm  border-b">PRICE</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -165,7 +165,7 @@ const OrderDetails = () => {
                                 orderDetails?.cart?.map((item, index) => (
                                     <tr key={index} className="hover:bg-gray-50 border-b transition duration-300">
                                         <td>
-                                            <td className="py-4 px-4 flex justify-start">
+                                            <td className="py-4 px-6 ">
                                                 <img
                                                     src="https://source.unsplash.com/64x64/?microphone"
                                                     alt="table navigate ui"
