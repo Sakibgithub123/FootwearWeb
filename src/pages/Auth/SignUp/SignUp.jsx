@@ -1,114 +1,130 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../../Provider/AuthProvider';
+import useAxiousSecure from '../../../hooks/useAxiousSecure';
+import { useNavigate } from 'react-router-dom';
+import useAxiousPublic from '../../../hooks/useAxiousPublic';
 const SignUp = () => {
-    const { createUser, updateProfile } = useContext(AuthContext)
+    const { createUser, updateUserProfile } = useContext(AuthContext)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => {
-        const name = data.name;
-        const email = data.email;
-        const photo = data.photo;
-        const password = data.password;
-        createUser(name, email)
-            .then((result) => {
-                console.log(result);
-            })
-            .catch(error => {
-                console.error(error)
-            })
+    const axiousSecure = useAxiousSecure()
+    const axiousPublic = useAxiousPublic()
+    const [emailError, setEmailError] = useState('')
+    const navigate = useNavigate()
+    const image_api_key = import.meta.env.VITE_imageBB_api;
+    const imageUploadURL = `https://api.imgbb.com/1/upload?key=${image_api_key}`
+    const onSubmit = async (data) => {
+        const { name, email, password } = data;
+        const imageFile = { image: data.image[0] };
 
+        try {
+            // Create user
+            const result = await createUser(email, password);
+            console.log(result);
+
+            // Upload image
+            const imageResponse = await axiousPublic.post(imageUploadURL, imageFile, {
+                headers: { 'content-type': 'multipart/form-data' },
+            });
+
+            if (imageResponse.data.success) {
+                const photo = imageResponse.data.data.display_url;
+
+                // Update user profile
+                const profileUpdate = await updateUserProfile(name, photo);
+                console.log(profileUpdate);
+
+                const userInfo = {
+                    name: name,
+                    email: email,
+                    image: photo,
+                };
+
+                // Save user info to the database
+                const userResponse = await axiousSecure.post('/users', userInfo);
+
+                if (userResponse.data.insertedId) {
+                    alert('Sign-up success');
+                    setEmailError("");
+                    navigate('/login');
+                }
+            }
+        } catch (error) {
+            console.error(error);
+            if (error.code === "auth/email-already-in-use") {
+                setEmailError("Email Already Exists");
+            } else {
+                console.error(error.message);
+            }
+        }
     };
+
     return (
         <div className="mx-auto w-full max-w-md space-y-4 my-20 rounded-lg border bg-white p-10 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
-
             <h1 className="text-3xl font-semibold">Sign Up</h1>
-
+            <p className='text-center py-1 text-red-400'>{emailError}</p>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-
                 <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
-
                     <label htmlFor="username_2" className="block font-medium text-left">
-
                         Name
-
                     </label>
-
                     <input
-                        {...register("name", { required: true })}
+                        {...register("name", { required: "Name is required" })}
                         aria-invalid={errors.name ? "true" : "false"}
-                        className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700 text-left"
-
+                        className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
                         id="username_2"
-
                         placeholder="Enter username"
-
-                        name="name"
-
                         type="text"
-
                     />
-                    {errors.name?.type === 'required' && <p role="alert">Name is required</p>}
+                    {/* {errors.name?.type === 'required' && <p role="alert text-left">Name is required</p>} */}
+                    {errors.name && <p role="alert ">{errors.name?.message}</p>}
                 </div>
                 <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300 text-left">
-
                     <label htmlFor="username_2" className="block font-medium">
-
                         Email
-
                     </label>
-
                     <input
-
                         {...register("email", { required: "Email Address is required" })}
                         aria-invalid={errors.email ? "true" : "false"}
-
                         className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
-
                         id="email"
-
                         placeholder="Enter Email"
-
-                        name="email"
-
                         type="email"
-
                     />
                     {errors.email && <p role="alert">{errors.email?.message}</p>}
                 </div>
 
                 <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
                     <label htmlFor="password_2" className="block font-medium text-left">
-
                         Password
-
                     </label>
-
                     <input
                         {...register("password", { required: true, minLength: 6 })}
                         className="flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700"
 
                         id="password_2"
-
                         placeholder="Enter password"
-
-                        name="password"
-
                         type="password"
-
                     />
-                    {errors.password?.type === 'required' && <p role="alert">Password is required</p>}
-                    {errors.password?.type === 'minLength' && <p role="alert">Password must be less than is 8</p>}
-                    <div className="flex justify-end text-xs">
-
-                        <a href="#" className="text-zinc-700 hover:underline dark:text-zinc-300">
-
-                            Forgot Password?
-
-                        </a>
-
-                    </div>
-
+                    {errors.password?.type === 'required' && <p role="text-left">Password is required</p>}
+                    {errors.password?.type === 'minLength' && <p role="text-left">Password must be less than is 8</p>}
                 </div>
+                <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300 text-left">
+                    <label htmlFor="username_2" className="block font-medium">
+                        Image
+                    </label>
+                    <input
+                        {...register("image", { required: "Image is required" })}
+                        type="file"
+                        className="file-input file-input-bordered  w-full focus:ring-1 focus-visible:outline-none dark:border-zinc-700" />
+                    {errors.image && <p role="alert">{errors.image?.message}</p>}
+                </div>
+                <div className="flex justify-end text-xs">
+                    <a href="#" className="text-zinc-700 hover:underline dark:text-zinc-300">
+                        Forgot Password?
+                    </a>
+                </div>
+
 
                 <button className="w- rounded-md bg-sky-500 px-4 py-2 text-white transition-colors hover:bg-sky-600 dark:bg-sky-700">Submit</button>
 

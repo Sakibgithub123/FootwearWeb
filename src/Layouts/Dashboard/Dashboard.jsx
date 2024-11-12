@@ -14,7 +14,7 @@ const Dashboard = () => {
                     {
                         admin ?
                             <div className="menu flex flex-col space-y-4">
-                                <li className="btn btn-neutral"><NavLink to='/dashboard/adminAashboard'>Dashboard</NavLink></li>
+                                <li className="btn btn-neutral"><NavLink  to='/dashboard'>Dashboard</NavLink></li>
                                 <li className="btn btn-neutral"><NavLink to='/dashboard/allusers'>All Users</NavLink></li>
                                 <li className="btn btn-neutral"><NavLink to='/dashboard/allitems'>All Items</NavLink></li>
                                 <li className="btn btn-neutral">

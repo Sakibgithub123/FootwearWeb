@@ -24,6 +24,7 @@ import OrderInvoices from "../pages/Dashboard/Order/OrderInvoices/OrderInvoices"
 import OrderDetails from "../pages/Dashboard/Order/OrderDetails/OrderDetails";
 import InVoices from "../pages/Dashboard/InVoices/InVoices";
 import EmailInvoices from "../pages/Dashboard/InVoices/EmailInvoices";
+import Profile from "../pages/Dashboard/Profile/Profile";
 
 
 export const router = createBrowserRouter([
@@ -70,12 +71,16 @@ export const router = createBrowserRouter([
         children:
         [
             {
-                path:'adminAashboard',
+                path:'/dashboard',
                 element:<AdninDashboard></AdninDashboard>
             },
             {
                 path:'allUsers',
                 element:<AllUsers></AllUsers>
+            },
+            {
+                path:'user/profile/:email',
+                element:<Profile></Profile>
             },
             {
                 path:'allitems',

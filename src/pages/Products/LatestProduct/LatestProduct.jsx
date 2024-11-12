@@ -26,7 +26,6 @@ const LatestProduct = () => {
             <div className='grid grid-cols-3 gap-10'>
                 {
                     products.map((item,index) =>
-                        <>
                             <div key={index} className="w-full max-w-[340px] space-y-3 rounded-xl bg-white p-4 shadow-lg dark:bg-[#18181B]">
                                 <div className="relative flex h-48 w-full justify-center lg:h-[260px]">
                                     <div className="absolute left-4 right-4 top-4 flex items-center justify-between">
@@ -46,12 +45,9 @@ const LatestProduct = () => {
                                 <div className="flex flex-wrap items-center justify-between gap-6 text-sm md:text-base">
                                     <Link to={`/productDetails/${item._id}`}><button className="rounded-lg bg-[#49B2FF] px-4 py-2 font-semibold text-white duration-300 hover:scale-105 hover:bg-sky-600">View Details</button></Link>
                                     {/* <button className="rounded-lg bg-gray-400 px-4 py-2 font-semibold text-white duration-300 hover:scale-95 hover:bg-gray-600">Add to Cart</button> */}
-                                    <CartButton id={item._id}></CartButton>
+                                    <CartButton id={item._id} item={item}></CartButton>
                                 </div>
                             </div>
-
-
-                        </>
                     )
                 }
             </div>

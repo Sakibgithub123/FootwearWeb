@@ -2,29 +2,39 @@ import React, { useContext, useEffect, useState } from 'react';
 import SectionTitle from '../../components/SectionTitle/SectionTitle';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
+import useAxiousSecure from '../../hooks/useAxiousSecure';
+import { useQuery } from '@tanstack/react-query';
+import useCart from '../../hooks/useCart';
 
 const Cart = () => {
+    const axiousSecure = useAxiousSecure()
     const { user } = useContext(AuthContext);
     const [cart, setCartData] = useState([]); // Initialize cart as an empty array
     const [quantities, setQuantities] = useState([]); // Initialize quantities array
     const email = user?.email;
-    // console.log(email);
-    
+
+
+
     useEffect(() => {
         if (email) { // Ensure email is defined before making the fetch request
-            fetch(`http://localhost:5000/api/cart/${email}`)
-                .then(res => res.json())
-                .then(data => {
-                    if (Array.isArray(data)) {
-                        setCartData(data); // Ensure that only an array is passed to setCartData
-                        setQuantities(new Array(data.length).fill(1)); // Initialize quantities array with default value of 1 for each item
+            // fetch(`http://localhost:5000/api/cart/${email}`)
+            axiousSecure.get(`/api/cart/${email}`)
+                // .then(res => res.json())
+                // .then(data => setCartData(data))
+                .then(res => {
+                    if (Array.isArray(res.data)) {
+                        setCartData(res.data); // Ensure that only an array is passed to setCartData
+                        setQuantities(new Array(res.data.length).fill(1)); // Initialize quantities array with default value of 1 for each item
                     } else {
                         setCartData([]);
                     }
                 })
                 .catch(error => console.log(error));
         }
-    }, [email]);
+    }, [axiousSecure, email]);
+
+
+
 
     const handleQtyChange = (e, index) => {
         const newQuantities = [...quantities]; // Copy the current quantities array
@@ -36,41 +46,64 @@ const Cart = () => {
     const totalPrice = cart.reduce((acc, item, index) => acc + (item.price * quantities[index]), 0);
     const handleCheckout = () => {
         const checkoutData = {
-          cart,
-          totalPrice,
-          quantities,
+            cart,
+            totalPrice,
+            quantities,
         };
-      
+
         // Save data to localStorage
         localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
-      };
+    };
+
+    //handle delete
+    const handleDeleteCartItem = (id) => {
+        axiousSecure.delete(`/api/deleteCartItem/${id}`)
+            .then(res => {
+                if (res.data.deletedCount > 0) {
+                    // refetch()
+                    axiousSecure.get(`/api/cart/${email}`)
+                        .then(res => {
+                            setCartData(res.data)
+                        })
+
+                            alert('delete success')
+                        }
+            })
+    }
 
     return (
         <div>
             <SectionTitle heading={`Your Cart (${cart.length} items)`}></SectionTitle>
-            <div className='flex flex-row justify-center space-x-72 items-center border-b-2 border-gray-400 py-3'>
-                <p className='w-9/12'>Item</p>
-                <p className='w-1/12'>Price</p>
-                <p className='w-1/12'>Quantity</p>
-                <p className='w-1/12'>Total</p>
+            <div className='flex flex-row justify-between  items-center border-b-2 border-gray-400 py-3'>
+                <p className='w-5/12 text-center'>Item</p>
+                <p className='w-1/12 '>Price</p>
+                <p className='w-3/12 '>Quantity</p>
+                <p className='w-3/12 '>Total</p>
+                {/* <p className='w-1/12'></p> */}
             </div>
             {
                 Array.isArray(cart) && cart.length > 0 ? (
                     cart.map((item, index) => (
-                        <div key={index} className='flex flex-row justify-center items-center space-x-72 border-b-2 border-gray-400 py-3'>
-                            <p className='w-9/12'>{item.name}</p>
-                            <p className='w-1/12 text-center'>{item.price}</p>
-                            <p className='w-1/12'>
-                                <input 
-                                    type="number" 
-                                    min={1} 
+                        <div key={index} className='flex flex-row justify-between items-center  border-b-2 border-gray-400 py-3'>
+                            <div className='w-5/12 pl-10 flex flex-row space-x-8 items-center text-justify gap-4 '>
+                                <p className='text-justify '><img src={item.image} alt="image" className="h-12 w-12 object-cover bg-gray-300 rounded" /></p>
+                                <p className='text-justify'>{item.name}</p>
+                            </div>
+                            <p className='w-1/12'>${item.price}</p>
+                            <p className='w-3/12'>
+                                <input
+                                    type="number"
+                                    min={1}
                                     value={quantities[index]} // Use the individual quantity for this item
                                     onChange={(e) => handleQtyChange(e, index)} // Update quantity for the specific item
-                                    className='border py-1 px-4 my-1' 
-                                    name='quantity' 
+                                    className='border py-1 px-4 my-1'
+                                    name='quantity'
                                 />
                             </p>
-                            <p className='w-1/12'>{item.price * quantities[index]}</p> {/* Calculate total for each item */}
+                            <div className='w-3/12 '>
+                                <p className=''>${item.price * quantities[index]}</p>
+                            </div> {/* Calculate total for each item */}
+                            <button className='text-rose-400' title='Delete' onClick={() => handleDeleteCartItem(item._id)}>x</button>
                         </div>
                     ))
                 ) : (
@@ -79,13 +112,14 @@ const Cart = () => {
             }
 
             {/* Display total price of all items in the cart */}
-            <div className='flex flex-row-reverse space-x-36 space-x-reverse mr-5'>
+            {/* <div className='flex flex-row-reverse space-x-20 space-x-reverse mr-26'> */}
+            <div className='flex justify-end gap-6 font-semibold mr-28'>
+                <p>Total:</p>
                 <p>${totalPrice.toFixed(2)}</p> {/* Display the total price */}
-                <p>Total</p>
             </div>
             <Link to='/checkout'>
-    <button className='btn btn-success' onClick={handleCheckout}>Checkout</button>
-  </Link>
+                <button className='btn btn-success' onClick={handleCheckout}>Checkout</button>
+            </Link>
         </div>
     );
 };
