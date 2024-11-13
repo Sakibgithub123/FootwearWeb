@@ -47,72 +47,72 @@ const AdninDashboard = () => {
             {/* // tab */}
             <div role="tablist" className="tabs tabs-lifted my-10 ml-3 text-violet-400">
                 <input type="radio" name="my_tabs_2" role="tab" className="tab text-stone-600" aria-label="Today" />
-                <div role="tabpanel" className="tab-content bg-base-400 border-orange-400  rounded-box p-6">
+                <div role="tabpanel" className="tab-content bg-xs-400 border-orange-400  rounded-box p-6">
                     <div className='grid grid-cols-3 gap-5 ml-3 my-3'>
-                        <div className='flex flex-row p-4 justify-between  bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between  bg-xs-200 border border-slate-100 rounded-lg'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Customers</h3>
-                                <p className='text-stone-950 text-base'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Customers</h3>
+                                <p className='text-stone-950 text-xs'>1,234</p>
                             </div>
                             <div className='text-right'>
                                 <TbMan className='text-4xl text-right text-indigo-400' />
                             </div>
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Orders Total</h3>
-                                <p className='text-stone-950 text-base'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Orders Total</h3>
+                                <p className='text-stone-950 text-xs'>1,234</p>
                             </div>
                             <div className='text-right'>
                                 <IoCartSharp className='text-4xl text-right text-cyan-400' />
                             </div>
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Avg Sale</h3>
-                                <p className='text-stone-950 text-base'>$1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Avg Sale</h3>
+                                <p className='text-stone-950 text-xs'>$1,234</p>
                             </div>
                             <LuPercent className='text-4xl text-right text-pink-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Avg Item Sale</h3>
-                                <p className='text-stone-950 text-base'>$1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Avg Item Sale</h3>
+                                <p className='text-stone-950 text-xs'>$1,234</p>
                             </div>
                             <BiCalculator className='text-4xl text-right text-orange-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Avg Total Sale</h3>
-                                <p className='text-stone-950 text-base'>$1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Avg Total Sale</h3>
+                                <p className='text-stone-950 text-xs'>$1,234</p>
                             </div>
                             <MdCalculate className='text-4xl text-right text-lime-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Visitors</h3>
-                                <p className='text-stone-950 text-base'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Visitors</h3>
+                                <p className='text-stone-950 text-xs'>1,234</p>
                             </div>
                             <HiMiniUserGroup className='text-4xl text-right text-green-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Total Products</h3>
-                                <p className='text-stone-950 text-base'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Total Products</h3>
+                                <p className='text-stone-950 text-xs'>1,234</p>
                             </div>
                             <MdOutlineProductionQuantityLimits className='text-4xl text-right text-emerald-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>TopSellingItem</h3>
-                                <p className='text-stone-950 text-base'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>TopSellingItem</h3>
+                                <p className='text-stone-950 text-xs'>1,234</p>
                             </div>
                             <FaStar className='text-4xl text-right text-yellow-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-teal-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-teal-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>DellerShip</h3>
-                                <p className='text-stone-950 sky-lg'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>DellerShip</h3>
+                                <p className='text-stone-950 sky-sm'>1,234</p>
                             </div>
                             <MdAutoGraph className='text-4xl text-right text-amber-400' />
                         </div>
@@ -126,72 +126,72 @@ const AdninDashboard = () => {
                     className="tab text-stone-600"
                     aria-label="Week"
                     defaultChecked />
-                <div role="tabpanel" className="tab-content bg-base-100 border-orange-400 rounded-box p-6">
+                <div role="tabpanel" className="tab-content bg-xs-100 border-orange-400 rounded-box p-6">
                     <div className='grid grid-cols-3 gap-5 ml-3 my-3'>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Customers</h3>
-                                <p className='text-stone-950 text-base'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Customers</h3>
+                                <p className='text-stone-950 text-xs'>1,234</p>
                             </div>
                             <div className='text-right'>
                                 <TbMan className='text-4xl text-right text-indigo-400' />
                             </div>
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Order</h3>
-                                <p className='text-stone-950 text-base'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Order</h3>
+                                <p className='text-stone-950 text-xs'>1,234</p>
                             </div>
                             <div className='text-right'>
                                 <IoCartSharp className='text-4xl text-right text-cyan-400' />
                             </div>
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Avg Sale</h3>
-                                <p className='text-stone-950 text-base'>$1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Avg Sale</h3>
+                                <p className='text-stone-950 text-xs'>$1,234</p>
                             </div>
                             <LuPercent className='text-4xl text-right text-pink-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Avg Item Sale</h3>
-                                <p className='text-stone-950 text-base'>$1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Avg Item Sale</h3>
+                                <p className='text-stone-950 text-xs'>$1,234</p>
                             </div>
                             <BiCalculator className='text-4xl text-right text-orange-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Avg Total Sale</h3>
-                                <p className='text-stone-950 text-base'>$1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Avg Total Sale</h3>
+                                <p className='text-stone-950 text-xs'>$1,234</p>
                             </div>
                             <MdCalculate className='text-4xl text-right text-lime-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Visitors</h3>
-                                <p className='text-stone-950 text-base'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Visitors</h3>
+                                <p className='text-stone-950 text-xs'>1,234</p>
                             </div>
                             <HiMiniUserGroup className='text-4xl text-right text-green-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Total Products</h3>
-                                <p className='text-stone-950 text-base'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Total Products</h3>
+                                <p className='text-stone-950 text-xs'>1,234</p>
                             </div>
                             <MdOutlineProductionQuantityLimits className='text-4xl text-right text-emerald-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Top Selling Item</h3>
-                                <p className='text-stone-950 text-base'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Top Selling Item</h3>
+                                <p className='text-stone-950 text-xs'>1,234</p>
                             </div>
                             <FaStar className='text-4xl text-right text-yellow-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-teal-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-teal-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>DellerShip</h3>
-                                <p className='text-stone-950 sky-lg'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>DellerShip</h3>
+                                <p className='text-stone-950 sky-sm'>1,234</p>
                             </div>
                             <MdAutoGraph className='text-4xl text-right text-amber-400' />
                         </div>
@@ -199,72 +199,72 @@ const AdninDashboard = () => {
                 </div>
 
                 <input type="radio" name="my_tabs_2" role="tab" className="tab text-stone-600" aria-label="Month" />
-                <div role="tabpanel" className="tab-content bg-base-100 border-orange-400 rounded-box p-6">
+                <div role="tabpanel" className="tab-content bg-xs-100 border-orange-400 rounded-box p-6">
                     <div className='grid grid-cols-3 gap-5 ml-3 my-3'>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Customers</h3>
-                                <p className='text-stone-950 text-base'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Customers</h3>
+                                <p className='text-stone-950 text-xs'>1,234</p>
                             </div>
                             <div className='text-right'>
                                 <TbMan className='text-4xl text-right text-indigo-400' />
                             </div>
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Order</h3>
-                                <p className='text-stone-950 text-base'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Order</h3>
+                                <p className='text-stone-950 text-xs'>1,234</p>
                             </div>
                             <div className='text-right'>
                                 <IoCartSharp className='text-4xl text-right text-cyan-400' />
                             </div>
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Avg Sale</h3>
-                                <p className='text-stone-950 text-base'>$1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Avg Sale</h3>
+                                <p className='text-stone-950 text-xs'>$1,234</p>
                             </div>
                             <LuPercent className='text-4xl text-right text-pink-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Avg Item Sale</h3>
-                                <p className='text-stone-950 text-base'>$1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Avg Item Sale</h3>
+                                <p className='text-stone-950 text-xs'>$1,234</p>
                             </div>
                             <BiCalculator className='text-4xl text-right text-orange-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Avg Total Sale</h3>
-                                <p className='text-stone-950 text-base'>$1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Avg Total Sale</h3>
+                                <p className='text-stone-950 text-xs'>$1,234</p>
                             </div>
                             <MdCalculate className='text-4xl text-right text-lime-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Visitors</h3>
-                                <p className='text-stone-950 text-base'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Visitors</h3>
+                                <p className='text-stone-950 text-xs'>1,234</p>
                             </div>
                             <HiMiniUserGroup className='text-4xl text-right text-green-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Total Products</h3>
-                                <p className='text-stone-950 text-base'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Total Products</h3>
+                                <p className='text-stone-950 text-xs'>1,234</p>
                             </div>
                             <MdOutlineProductionQuantityLimits className='text-4xl text-right text-emerald-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-slate-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-slate-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>Top Selling Item</h3>
-                                <p className='text-stone-950 text-base'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>Top Selling Item</h3>
+                                <p className='text-stone-950 text-xs'>1,234</p>
                             </div>
                             <FaStar className='text-4xl text-right text-yellow-400' />
                         </div>
-                        <div className='flex flex-row p-4 justify-between bg-base-200 border border-teal-100 rounded-lg'>
+                        <div className='flex flex-row p-4 justify-between bg-xs-200 border border-teal-100 rounded-sm'>
                             <div className='text-left'>
-                                <h3 className='text-slate-500 text-lg'>DellerShip</h3>
-                                <p className='text-stone-950 sky-lg'>1,234</p>
+                                <h3 className='text-slate-500 text-sm'>DellerShip</h3>
+                                <p className='text-stone-950 sky-sm'>1,234</p>
                             </div>
                             <MdAutoGraph className='text-4xl text-right text-amber-400' />
                         </div>

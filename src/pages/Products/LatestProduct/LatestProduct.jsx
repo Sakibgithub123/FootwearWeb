@@ -17,7 +17,7 @@ const LatestProduct = () => {
             // setLoading(false)
            
         })
-    },[])
+    },[products])
     // console.log(products);
     return (
         <div>
@@ -25,7 +25,7 @@ const LatestProduct = () => {
             {/* card */}
             <div className='grid grid-cols-3 gap-10'>
                 {
-                    products.map((item,index) =>
+                    products.slice(0,6).map((item,index) =>
                             <div key={index} className="w-full max-w-[340px] space-y-3 rounded-xl bg-white p-4 shadow-lg dark:bg-[#18181B]">
                                 <div className="relative flex h-48 w-full justify-center lg:h-[260px]">
                                     <div className="absolute left-4 right-4 top-4 flex items-center justify-between">
@@ -35,7 +35,7 @@ const LatestProduct = () => {
                                         </div>
                                         <button className="rounded-xl bg-[#0095FF] px-3 py-1 font-medium text-white duration-200 hover:bg-[#0095FF]/90">30% off</button>
                                     </div>
-                                    <img width={400} height={400} className="rounded-lg bg-black/40 object-cover" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="card navigate ui" />
+                                    <img width={400} height={400} className="rounded-lg bg-black/40 object-cover" src={item?.image} alt="card img" />
                                 </div>
                                 <div className="space-y-2 font-semibold">
                                     <h6 className="text-sm md:text-base lg:text-lg">{item.name}</h6>

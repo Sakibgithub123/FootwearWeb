@@ -4,39 +4,35 @@ import useAxiousSecure from '../../hooks/useAxiousSecure';
 import { replace, useLocation, useNavigate } from 'react-router-dom';
 
 const CartButton = ({ id, item }) => {
-    const { name, price, description } = item
+    // console.log(item);
+    const {  name,price,image, description } = item
     const { user } = useContext(AuthContext)
     const email = user?.email;
     // const [cart, setCart] = useState('');
     const axiousSecure = useAxiousSecure()
-    const location=useLocation()
-    const navigate=useNavigate()
-    const handleAddToCart=(food)=>{
+    const location = useLocation()
+    const navigate = useNavigate()
+    const handleAddToCart = async (food) => {
         // e.preventDefault()
         // console.log(item);
         console.log(food);
         if (user && user.email) {
             const cartInfo = {
-                // image: image,,
-                name:name,
-                price:price,
-                description:description,
+                image: image,
+                name: name,
+                price: price,
+                description: description,
                 customer_email: email
 
             }
             // console.log(name, price, description);
-            axiousSecure.post('/api/addtocart',cartInfo)
-            .then((res)=>{
-                console.log(res.data);
-                if(res.data.insertedId){
-                    alert('Item added to cart successfully!');
-                    // alert(res.data.message);
-                    // alert(`${name} added to your cart`)
-                }
-                // refetch()
-            })
-        }else{
-            navigate('/login',{state:{from:location}})
+            const res = await axiousSecure.post('/api/addtocart', cartInfo)
+            console.log(res.data);
+            if (res.data.result.insertedId) {
+                alert(res.data.message);
+            }
+        } else {
+            navigate('/login', { state: { from: location } })
         }
     }
 
@@ -76,11 +72,11 @@ const CartButton = ({ id, item }) => {
     //     });
     // };
     // console.log(products);
-    
+
     // console.log(name, price, description);
     return (
         <div>
-            <button onClick={()=>handleAddToCart(item)} className="rounded-lg bg-gray-400 px-4 py-2 font-semibold text-white duration-300 hover:scale-95 hover:bg-gray-600">Add to Cart</button>
+            <button onClick={() => handleAddToCart(item)} className="rounded-lg bg-gray-400 px-4 py-2 font-semibold text-white duration-300 hover:scale-95 hover:bg-gray-600">Add to Cart</button>
         </div>
         // <form onSubmit={handleAddToCart}>
         /* <input type="text" value={cart?.name} name='name' />

@@ -1,4 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import CartButton from '../../../components/CartButton/CartButton';
+import { SiBrandfolder } from 'react-icons/si';
+import { BiSolidCategory } from 'react-icons/bi';
 
 const ProductBar = ({ products, noProducts }) => {
     return (
@@ -24,17 +28,23 @@ const ProductBar = ({ products, noProducts }) => {
                         {
                             products.map((item, index) =>
                                 <div key={index} className="max-w-[300px] space-y-4 rounded-lg bg-white p-6 shadow-lg md:w-[300px] dark:bg-[#18181B]">
-                                    <img width={400} height={400} className="h-[275px] w-[350px] rounded-lg object-cover" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="card navigate ui" />
+                                    <img width={400} height={400} className="h-[275px] w-[350px] rounded-lg object-cover" src={item?.image} alt="card  img" />
                                     <div className="grid gap-2">
                                         <h1 className="text-lg font-semibold ">{item.name}</h1>
-                                        <h1 className="text-lg font-semibold ">{item.category}</h1>
-                                        <h1 className="text-lg font-semibold ">{item.brand}</h1>
-                                        <p className="text-sm text-gray-500 dark:text-white/60">This is a brief description of the product. It highlights the key features and benefits.</p>
-                                        <div className="text-lg font-semibold">$99.99</div>
+                                        <div className='flex flex-row justify-evenly'>
+                                            <h1 className="text-lg font-semibold flex flex-row justify-center items-center gap-1"><span><BiSolidCategory /></span><span>{item.category}</span></h1>
+                                            <h1 className="text-lg font-semibold flex flex-row justify-center items-center gap-1"><span><SiBrandfolder /></span><span>{item.brand}</span></h1>
+                                        </div>
+                                        <p className="text-sm text-gray-500 dark:text-white/60">{item.description}</p>
+                                        {/* <p className="text-sm text-gray-500 dark:text-white/60">This is a brief description of the product. It highlights the key features and benefits.</p> */}
+                                        <div className="text-lg font-semibold">${item.price}</div>
                                     </div>
                                     <div className="flex gap-4">
-                                        <button className="rounded-lg bg-slate-800 px-6 py-2 text-[12px] font-semibold text-white duration-300 hover:bg-slate-950 sm:text-sm md:text-base">Add to Cart</button>
-                                        <button className="rounded-md border border-black px-4 dark:border-white dark:hover:text-slate-800 dark:hover:bg-white py-2 duration-300 hover:bg-gray-200">View Details</button>
+                                        <CartButton id={item._id} item={item}></CartButton>
+                                        {/* <button className="rounded-lg bg-slate-800 px-6 py-2 text-[12px] font-semibold text-white duration-300 hover:bg-slate-950 sm:text-sm md:text-base">Add to Cart</button> */}
+                                        <Link to={`/productDetails/${item._id}`}>
+                                            <button className="rounded-md border border-black px-4 dark:border-white dark:hover:text-slate-800 dark:hover:bg-white py-2 duration-300 hover:bg-gray-200">View Details</button>
+                                        </Link>
                                     </div>
                                 </div>
                             )

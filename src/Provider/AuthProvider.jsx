@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword,signInWithPopup,signOut,updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, deleteUser, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword,signInWithPopup,signOut,updateProfile } from "firebase/auth";
 import app from '../Firebase/firebase.config';
 import useAxiousPublic from '../hooks/useAxiousPublic';
 export const AuthContext=createContext(null)
@@ -35,6 +35,9 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth, provider)
 
     }
+    const userDelete=()=>{
+        return deleteUser(user)
+    }
 
     useEffect(()=>{
        const unSubscribe= onAuthStateChanged(auth,currentUser=>{
@@ -65,6 +68,7 @@ const AuthProvider = ({children}) => {
         signInUser,
         updateUserProfile,
         googleLogin,
+        userDelete,
         logOut
     }
     return (

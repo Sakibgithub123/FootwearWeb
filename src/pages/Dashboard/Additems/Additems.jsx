@@ -65,11 +65,11 @@ const Additems = () => {
     return (
         <div>
             <SectionTitle heading={'Add Items'}></SectionTitle>
-            <div className="flex justify-center ml-3">
+            <div className="flex justify-center mb-6 bg-base-200 p-4 ml-3">
                 <div className="w-full max-w-3xl  rounded-lg bg-white px-10 pb-10 pt-8 shadow-md dark:bg-zinc-900">
                     <div className="mb-6">
-                        <h2 className="text-center text-3xl font-semibold tracking-tight text-orange-300">Add New Item</h2>
-                        <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">We&apos;d love to hear from you!</p>
+                        <h2 className="text-center text-3xl font-semibold tracking-tight text-orange-300">Add New Product</h2>
+                        {/* <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">We&apos;d love to hear from you!</p> */}
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-6">
                         <div className="flex justify-between">
@@ -144,6 +144,8 @@ const Additems = () => {
                                             <option value="Blue">Blue</option>
                                             <option value="Pink">Pink</option>
                                             <option value="Brown">Brown</option>
+                                            <option value="Purple">Purple</option>
+                                            <option value="Gray">Gray</option>
                                         </select>
                                         {errors.color && (<p role="alert">{errors.color.message}</p>)}
 
@@ -244,7 +246,7 @@ const Additems = () => {
                             </div>
                         </div>
                         <div className="text-end mt-5">
-                            <button className="rounded-md bg-orange-500 px-3 py-2 text-white transition-colors hover:bg-sky-600 dark:bg-sky-700">ADD</button>
+                            <button className="rounded-md bg-orange-500 px-3 py-2 text-white transition-colors hover:bg-orange-300 dark:bg-orange-700">ADD</button>
                         </div>
                     </form>
                 </div>
@@ -255,7 +257,7 @@ const Additems = () => {
             <div className="overflow-x-scroll ml-3 bg-base-200 p-4 mt-4">
                 <h1 className='text-left text-stone-950 p-2 text-2xl font-bold border border-b-base-200 border-t-0'>All Products List</h1>
                 {/* <table className="max-w-[90%]shadow-md border mx-auto border-gray-100 my-6"> */}
-                <table className="max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg shadow-md border mx-auto border-gray-100 my-6">
+                <table className="max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg shadow-md border mx-auto border-gray-100 my-6 table table-zebra">
                     <thead>
                         <tr className="bg-orange-400 text-white">
                             <th className="py-2 px-3 text-sm  border-b">IMAGE</th>
@@ -274,18 +276,18 @@ const Additems = () => {
                         {
                             products.map((product) =>
                                 <tr key={product._id} className="hover:bg-gray-50 border-b transition duration-300">
-                                    <td className="py-3 px-3 border-b ">
+                                    <td className="py-3 px-3 border-b border-orange-400">
                                         <img src={product.image} alt="image" className="h-12 w-12 object-cover bg-gray-300 rounded" />
                                     </td>
-                                    <td className="py-2 px-3  border-b text-sm font-bold">{product.name}</td>
-                                    <td className="py-2 px-3  border-b text-sm font-bold">${product.price}</td>
-                                    <td className="py-2 px-3  border-b text-sm font-bold">{product.category}</td>
-                                    <td className="py-2 px-3  border-b text-sm font-bold">{product.color}</td>
-                                    <td className="py-2 px-3  border-b text-sm font-bold">{product.brand}</td>
-                                    <td className="py-2 px-3  border-b text-sm font-bold">{product.type}</td>
-                                    <td className="py-2 px-3  border-b text-sm font-bold">{product.status}</td>
-                                    <td className="py-2 px-3  border-b text-sm font-bold">{product.description}</td>
-                                    <td className="flex  flex-col space-y-2 mt-2 items-center">
+                                    <td className="py-2 px-3 border-b border-orange-400 text-xs font-semibold">{product.name}</td>
+                                    <td className="py-2 px-3 border-b border-orange-400 text-xs font-extralight">${product.price}</td>
+                                    <td className="py-2 px-3 border-b border-orange-400 text-xs font-extralight">{product.category}</td>
+                                    <td className="py-2 px-3 border-b border-orange-400 text-xs font-extralight">{product.color}</td>
+                                    <td className="py-2 px-3 border-b border-orange-400 text-xs font-extralight">{product.brand}</td>
+                                    <td className="py-2 px-3 border-b border-orange-400 text-xs font-extralight">{product.type}</td>
+                                    <td className="py-2 px-3 border-b border-orange-400 text-xs font-extralight">{product.status}</td>
+                                    <td className="py-2 px-3 border-b border-orange-400 text-xs font-extralight">{product.description}</td>
+                                    <td className="flex  flex-col space-y-2 mt-1  items-center py-2 px-3 border-b border-orange-400 text-sm font-extralight">
                                         <ProductEditButton id={product._id} refetch={refetch} />
                                         <div className="drawer-content">
                                             <button onClick={() => handleDelete(product._id, product.name)}

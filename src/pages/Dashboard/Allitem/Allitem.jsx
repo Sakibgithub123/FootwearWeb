@@ -75,8 +75,8 @@ const Allitem = () => {
             <SectionTitle heading={'All Items'}></SectionTitle>
             <div>
                 <div className="mb-6 bg-base-200 p-4 ml-3">
-                    <h2 className="text-center text-3xl font-semibold tracking-tight text-orange-300">Filter Products</h2>
-                    <p className="text-center text-sm text-zinc-500 dark:text-zinc-400 mb-4">We&apos;d love to hear from you!</p>
+                    <h2 className="text-center text-3xl font-semibold tracking-tight text-orange-300 mb-1">Filter Products</h2>
+                    {/* <p className="text-center text-sm text-zinc-500 dark:text-zinc-400 mb-4">We&apos;d love to hear from you!</p> */}
                     <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-6">
                         <div className='flex flex-row space-x-4 justify-center'>
                             <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-400">
@@ -203,17 +203,17 @@ const Allitem = () => {
                                 </select>
                             </div>
                         </div>
-                        <button className="rounded-md bg-orange-500 px-4 py-2 text-white transition-colors hover:bg-sky-600 dark:bg-sky-700">Filter</button>
+                        <button className="rounded-md bg-orange-500 px-4 py-2 text-white transition-colors hover:bg-orange-300 dark:bg-orange-700">Filter</button>
                     </form>
                 </div>
             </div>
             <div className="overflow-x-auto bg-base-200 p-4 mt-4 ml-3">
                 <h1 className='text-left text-stone-950 p-2 text-2xl font-bold border   border-b-base-200 border-t-0'>All Items List</h1>
                 {/* <table className="max-w-[90%]shadow-md border mx-auto border-gray-100 my-6"> */}
-                <table className="min-w-[90%] shadow-md  border mx-auto border-gray-100  my-6">
+                <table className="max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg shadow-md border mx-auto border-gray-100 my-6 table table-zebra">
                     <thead>
-                        <tr className="bg-orange-400 text-center text-white">
-                            <th className="py-2 px-3  text-sm  border-b text-sm">#</th>
+                        <tr className="bg-orange-400  text-white">
+                            <th className="py-2 px-3  text-sm  border-b  text-sm">#</th>
                             <th className="py-2 px-3  text-sm  border-b text-sm">NAME</th>
                             <th className="py-2 px-3  text-sm  border-b">IMAGE</th>
                             <th className="py-2 px-3  text-sm  border-b text-sm">PRICE</th>
@@ -226,26 +226,26 @@ const Allitem = () => {
                             // Show "No products available" if the products array is empty and filterProducts is also empty
                             (products.length === 0) ? (
                                 <tr>
-                                    <td colSpan="5" className="py-2 px-3  text-center">No products available</td>
+                                    <td colSpan="5" className="py-2 px-3 text-center">No products available</td>
                                 </tr>
                             ) : (
                                 // If the filterProducts array is empty, show "No products found for the filter"
                                 filterProducts.length === 0 ? (
                                     <tr>
-                                        <td colSpan="5" className="py-2 px-3  text-center">No products found for the filter</td>
+                                        <td colSpan="5" className="py-2 px-3 text-center">No products found for the filter</td>
                                     </tr>
                                 ) : (
                                     // If there are products in either array, display them
                                     (filterProducts.length > 0 ? filterProducts : products).map((item, index) => (
                                         <tr key={index} className="hover:bg-gray-50 transition duration-300">
-                                            <td className="py-2 px-3    border-b text-sm font-bold">{index + 1}</td>
-                                            <td className="py-2 px-3    border-b text-sm font-bold">{item.name}</td>
-                                            <td className="py-2 px-3    border-b">
+                                            <td className="py-2 px-3 border-b border-orange-400 text-xs font-extralight">{index + 1}</td>
+                                            <td className="py-2 px-3 border-b border-orange-400 text-xs font-semibold">{item.name}</td>
+                                            <td className="py-2 px-3 border-b border-orange-400">
                                                 <img src={item.image} alt="image" className="h-12 w-12 object-cover bg-gray-300 rounded" />
                                             </td>
-                                            <td className="py-2 px-3    border-b text-sm font-bold">${item.price}</td>
-                                            <td className="py-2 px-3    border-b text-sm font-bold">{item.quantity}</td>
-                                            <td className="py-2 px-3 border-b text-sm space-y-2 text-end">
+                                            <td className="py-2 px-3 border-b border-orange-400 text-xs font-extralight">${item.price}</td>
+                                            <td className="py-2 px-3 border-b border-orange-400 text-xs font-extralight">{item.quantity}</td>
+                                            <td className="py-2 px-3 border-b border-orange-400 text-xs space-y-2 text-end">
                                                 <ProductEditButton id={item._id} refetch={refetch} />
                                                 <button
                                                     onClick={() => handleDelete(item._id, item.name)}

@@ -1,12 +1,42 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
     return (
         <footer className="flex flex-col text-black mt-20">
 
             <div className="flex flex-col items-center justify-around gap-5 bg-gray-300 py-8 dark:bg-gray-500 dark:text-white md:flex-row md:gap-0">
-
-                <h5 className="text-2xl font-bold">FootWear</h5>
+                <div className='text-left'>
+                    <h5 className="text-2xl font-bold text-orange-400">FootWear</h5>
+                    <div className='flex gap-10'>
+                        {/* <h5 className="text-lg font-bold text-left text-orange-400">Services</h5> */}
+                        <nav className='flex flex-col text-left spacey-2 my-5'>
+                            <a className="link link-hover text-red-700 hover:text-orange-400">Branding</a>
+                            <a className="link link-hover text-red-700 hover:text-orange-400">Design</a>
+                            <a className="link link-hover text-red-700 hover:text-orange-400">Marketing</a>
+                            <a className="link link-hover text-red-700 hover:text-orange-400">Advertisement</a>
+                        </nav>
+                        <nav className='flex flex-col text-left spacey-2 my-5'>
+                            <a className="link link-hover text-red-700 hover:text-orange-400">Terms of use</a>
+                            <a className="link link-hover text-red-700 hover:text-orange-400">Privacy policy</a>
+                            <a className="link link-hover text-red-700 hover:text-orange-400">Cookie policy</a>
+                        </nav>
+                    </div>
+                </div>
+                <div className='mt-2 flex flex-col items-center justify-center'>
+                    <h3 className='text-center  text-xl text-orange-800 font-semibold indent-1'>FootWear Provides You Best Services Ever</h3>
+                    <ul className="flex h-full items-center justify-center gap-5 py-6">
+                        <li className="text-white link link-hover"><NavLink className='rounded py-2 px-2 bg-red-700 text-white-800' to={'/'}>Home</NavLink></li>
+                        <li className="text-white link link-hover"><NavLink className='rounded py-2 px-2 bg-red-700 text-white-800' to={'/shop'}>Shop</NavLink></li>
+                        <li className="text-white link link-hover"><NavLink className='rounded py-2 px-2 bg-red-700 text-white-800' to={'/cart'}>Cart</NavLink></li>
+                        <li className="text-white link link-hover"><NavLink className='rounded py-2 px-2 bg-red-700 text-white-800' to={'/aboutUs'}>About Us</NavLink></li>
+                        <li className="text-white link link-hover"><NavLink className='rounded py-2 px-2 bg-red-700 text-white-800' to={'/contact'}>Contact</NavLink></li>
+                    </ul>
+                    <div className='flex items-center'>
+                        <input type="text" placeholder="Subscribe Us" className="input input-bordered border-red-700 bg-orange-100 text-black w-full " />
+                        <button className='rounded py-2 px-2 bg-red-700 text-white mx-3 hover:bg-orange-400'>Subscribe</button>
+                    </div>
+                </div>
 
                 <nav className="text-lg">
 

@@ -83,9 +83,9 @@ const AddBrand = () => {
                         {
                             brand.map((brands, index) =>
                                 <tr key={index} className="hover:bg-gray-50 transition duration-300">
-                                    <td className="py-2 px-3  border-b text-sm font-bold">{index} </td>
-                                    <td className="py-2 px-3  border-b text-sm font-bold">{brands.brand}</td>
-                                    <td className="py-2 px-3 border-b text-sm font-bold">
+                                    <td className="py-2 px-3  border-b text-xs font-bold">{index} </td>
+                                    <td className="py-2 px-3  border-b text-xs font-bold">{brands.brand}</td>
+                                    <td className="py-2 px-3 border-b text-xs font-bold">
                                         <span className={`py-1 px-2 rounded-lg text-white ${brands.status === 'Scheduled' ? 'bg-yellow-500' :
                                             brands.status === 'Published' ? 'bg-green-900' :
                                                 'bg-rose-900'

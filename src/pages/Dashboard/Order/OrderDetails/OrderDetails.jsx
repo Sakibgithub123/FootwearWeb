@@ -3,26 +3,55 @@ import { FaCartArrowDown, FaUserCog } from 'react-icons/fa';
 import { MdEmail, MdPhoneInTalk } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
 import useAxiousSecure from '../../../../hooks/useAxiousSecure';
+import { useForm } from 'react-hook-form';
 
 const OrderDetails = () => {
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm({defaultValues:{orderTransection:""}});
     const { id } = useParams()
     const cusId = id
     const [orderDetails, setOrderDetails] = useState({})
-    console.log(id);
+    // console.log(id);
     const axiousSecure = useAxiousSecure()
     useEffect(() => {
         axiousSecure.get(`/orderDetails/${cusId}`)
             .then(res =>
-                setOrderDetails(res.data)
+                setOrderDetails(res.data),
             )
-
     }, [])
-    console.log(orderDetails);
+
+     const quantity=orderDetails?.quantities?.length
+        setValue('orderId', orderDetails.orderId),
+        setValue('status', orderDetails.status),
+        setValue('quantity',quantity )
+    // console.log(orderDetails);
     const subtotal = orderDetails?.totalPrice || 0;
     const shippingCost = 12.0;
     const taxRate = 0.18;
     const tax = subtotal * taxRate;
     const total = subtotal + shippingCost + tax;
+    const onSubmit = async (data) => {
+        console.log(data);
+        const {orderId,status,quantity,orderTransection,comment}=data
+        const statusOrder={
+            orderId:orderId,
+            status:status,
+            quantity:quantity,
+            orderTransection:orderTransection,
+            comment:comment
+
+        }
+        try{
+            const res= await axiousSecure.patch('/orderStatus',statusOrder)
+            if(res.data.insertedId){
+                alert('Order status send')
+            }
+        }
+        catch(error){
+          console.log('Something wrong',error);
+        }
+        
+       
+    }
     return (
         <div className='ml-3'>
             <h1 className='text-left text-stone-950 p-2 text-2xl font-bold border border-b-base-200 border-t-0'>Order Details: #Order-78414</h1>
@@ -68,70 +97,70 @@ const OrderDetails = () => {
                         <span className='text-sm text-stone-400'>Edit</span>
                     </div>
                     <div className='py-1 '>
-                        <span className='text-base text-stone-800 font-medium'>Block Number:</span>
-                        {/* <span className='text-base text-stone-950 font-bold'> A-510</span> */}
-                        <span className='text-base text-stone-950 font-bold'> {orderDetails.block_number}</span>
+                        <span className='text-xs text-stone-800 font-medium'>Block Number:</span>
+                        {/* <span className='text-xs text-stone-950 font-bold'> A-510</span> */}
+                        <span className='text-xs text-stone-950 font-bold'> {orderDetails.block_number}</span>
                     </div>
                     <div className='py-1 '>
-                        <span className='text-base text-stone-800 font-medium'>Address:</span>
-                        <span className='text-base text-stone-950 font-bold'> {orderDetails.address}</span>
-                        {/* <span className='text-base text-stone-950 font-bold'> 81 Fulton London</span> */}
+                        <span className='text-xs text-stone-800 font-medium'>Address:</span>
+                        <span className='text-xs text-stone-950 font-bold'> {orderDetails.address}</span>
+                        {/* <span className='text-xs text-stone-950 font-bold'> 81 Fulton London</span> */}
                     </div>
                     <div className='py-1 '>
-                        <span className='text-base text-stone-800 font-medium'>Pincode:</span>
-                        {/* <span className='text-base text-stone-950 font-bold'> 385467</span> */}
-                        <span className='text-base text-stone-950 font-bold'>{orderDetails.pin_code}</span>
+                        <span className='text-xs text-stone-800 font-medium'>Pincode:</span>
+                        {/* <span className='text-xs text-stone-950 font-bold'> 385467</span> */}
+                        <span className='text-xs text-stone-950 font-bold'>{orderDetails.pin_code}</span>
                     </div>
                     <div className='py-1 '>
-                        <span className='text-base text-stone-800 font-medium'>Phone:</span>
-                        <span className='text-base text-stone-950 font-bold'>{orderDetails.phone}</span>
-                        {/* <span className='text-base text-stone-950 font-bold'>  202-458-4568</span> */}
+                        <span className='text-xs text-stone-800 font-medium'>Phone:</span>
+                        <span className='text-xs text-stone-950 font-bold'>{orderDetails.phone}</span>
+                        {/* <span className='text-xs text-stone-950 font-bold'>  202-458-4568</span> */}
                     </div>
 
                 </div>
-                <div className='bg-base-200 text-left p-3 rounded'>
+                <div className='bg-xs-200 text-left p-3 rounded'>
                     <div className='mb-2 flex justify-between'>
                         <span className='text-base text-stone-950 font-bold'>Billing Address</span>
                         <span className='text-sm text-stone-400'>Edit</span>
                     </div>
                     <div className='py-1 '>
-                        <span className='text-base text-stone-800 font-medium'>Block Number:</span>
-                        <span className='text-base text-stone-950 font-bold'> {orderDetails.block_number}</span>
-                        {/* <span className='text-base text-stone-950 font-bold'> A-510</span> */}
+                        <span className='text-xs text-stone-800 font-medium'>Block Number:</span>
+                        <span className='text-xs text-stone-950 font-bold'> {orderDetails.block_number}</span>
+                        {/* <span className='text-xs text-stone-950 font-bold'> A-510</span> */}
                     </div>
                     <div className='py-1 '>
-                        <span className='text-base text-stone-800 font-medium'>Address:</span>
-                        <span className='text-base text-stone-950 font-bold'> {orderDetails.address}</span>
-                        {/* <span className='text-base text-stone-950 font-bold'> 81 Fulton London</span> */}
+                        <span className='text-xs text-stone-800 font-medium'>Address:</span>
+                        <span className='text-xs text-stone-950 font-bold'> {orderDetails.address}</span>
+                        {/* <span className='text-xs text-stone-950 font-bold'> 81 Fulton London</span> */}
                     </div>
                     <div className='py-1 '>
-                        <span className='text-base text-stone-800 font-medium'>Pincode:</span>
-                        <span className='text-base text-stone-950 font-bold'> {orderDetails.pin_code}</span>
-                        {/* <span className='text-base text-stone-950 font-bold'> 385467</span> */}
+                        <span className='text-xs text-stone-800 font-medium'>Pincode:</span>
+                        <span className='text-xs text-stone-950 font-bold'> {orderDetails.pin_code}</span>
+                        {/* <span className='text-xs text-stone-950 font-bold'> 385467</span> */}
                     </div>
                     <div className='py-1 '>
-                        <span className='text-base text-stone-800 font-medium'>Phone:</span>
-                        {/* <span className='text-base text-stone-950 font-bold'>  202-458-4568</span> */}
-                        <span className='text-base text-stone-950 font-bold'>  {orderDetails.phone}</span>
+                        <span className='text-xs text-stone-800 font-medium'>Phone:</span>
+                        {/* <span className='text-xs text-stone-950 font-bold'>  202-458-4568</span> */}
+                        <span className='text-xs text-stone-950 font-bold'>  {orderDetails.phone}</span>
                     </div>
 
                 </div>
-                <div className='bg-base-200 text-left p-3 rounded'>
+                <div className='bg-xs-200 text-left p-3 rounded'>
                     <div className='mb-2 flex justify-between'>
                         <span className='text-base text-stone-950 font-bold'>Invoice Deatil</span>
                         <span className='text-sm text-stone-400'>Download</span>
                     </div>
                     <div className='py-1 '>
-                        <span className='text-base text-stone-800 font-medium'>Number:</span>
-                        <span className='text-base text-stone-950 font-bold'> #78414</span>
+                        <span className='text-xs text-stone-800 font-medium'>Number:</span>
+                        <span className='text-xs text-stone-950 font-bold'> #78414</span>
                     </div>
                     <div className='py-1 '>
-                        <span className='text-base text-stone-800 font-medium'>Seller GST:</span>
-                        <span className='text-base text-stone-950 font-bold'> AFQWEPX17390VJ</span>
+                        <span className='text-xs text-stone-800 font-medium'>Seller GST:</span>
+                        <span className='text-xs text-stone-950 font-bold'> AFQWEPX17390VJ</span>
                     </div>
                     <div className='py-1 '>
-                        <span className='text-base text-stone-800 font-medium'>Purchase GST:</span>
-                        <span className='text-base text-stone-950 font-bold'> NVFQWEPX1730VJ</span>
+                        <span className='text-xs text-stone-800 font-medium'>Purchase GST:</span>
+                        <span className='text-xs text-stone-950 font-bold'> NVFQWEPX1730VJ</span>
                     </div>
                 </div>
 
@@ -164,26 +193,24 @@ const OrderDetails = () => {
                             {
                                 orderDetails?.cart?.map((item, index) => (
                                     <tr key={index} className="hover:bg-gray-50 border-b transition duration-300">
-                                        <td>
-                                            <td className="py-4 px-6 ">
+                                            <td className="py-4 px-6 text-xs flex justify-center ">
                                                 <img
-                                                    src="https://source.unsplash.com/64x64/?microphone"
+                                                    src={item?.image}
                                                     alt="table navigate ui"
-                                                    className="h-16 w-16 object-cover bg-gray-300"
+                                                    className="h-16 w-16 object-cover bg-gray-300 text-center"
                                                 />
                                             </td>
-                                        </td>
-                                        <td className="py-4 px-6 border-b text-sm font-extraLight">{item.name}</td>
-                                        <td className="py-4 px-6 border-b text-sm font-extraLight">
+                                        <td className="py-4 px-6 border-b text-xs font-extraLight">{item.name}</td>
+                                        <td className="py-4 px-6 border-b text-xs font-extraLight">
                                             {orderDetails?.quantities?.[index]}
                                         </td>
-                                        <td className="py-4 px-6 border-b text-sm font-extraLight">${item.price}</td>
+                                        <td className="py-4 px-6 border-b text-xs font-extraLight">${item.price}</td>
                                     </tr>
                                 ))
                             }
                         </tbody>
                     </table>
-                    <div className='flex justify-end mr-12 '>
+                    <div className='flex justify-end mr-12 text-xs '>
                         <div className='order-last w-5/12 border space-y-4 p-4  border-t-0 border-r-0 border-b-0'>
                             <div className='flex justify-between'>
                                 <span className='text-start font-light text-stone-600'>Subtotal Price:</span>
@@ -207,54 +234,63 @@ const OrderDetails = () => {
                 </div>
             </div>
             {/* status order  */}
-            <div className='ml-3 mt-4 flex justify-end'>
+            <div className='ml-3 mt-4 flex justify-end text-sm'>
                 <div className='w-6/12 font-medium bg-base-200 p-4 rounded'>
                     <h1 className='text-left text-stone-700 py-2 text-xl'>Status Orders</h1>
-                    <form action="" className='space-y-4'>
+                    <form onSubmit={handleSubmit(onSubmit)} className='space-y-1 text-sm'>
                         <label className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Order ID</span>
                             </div>
-                            <input type="text" placeholder="Type here" className="py-1 px-2 rounded border border-base-300 w-full" />
+                            <input {...register('orderId', { required: true })} type="text" placeholder="Type here" className="py-1 px-2 rounded border border-base-300 w-full" />
+                            {errors.orderId?.type === "required" && (<p role="alert">Order Id is required</p>)}
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Order Status</span>
                             </div>
                             <select name="orderStatus"
+                                {...register('status', { required: true })}
                                 className="py-1 px-2 rounded border border-base-300 w-full"
                             >
-                                <option value="Progress" selected>Progress</option>
+                                <option value="Progress">Progress</option>
                                 <option value="Completed">Completed</option>
                                 <option value="Pending">Pending</option>
                             </select>
+                            {errors.status?.type === "required" && (<p role="alert">Order Status is required</p>)}
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Quantity</span>
                             </div>
-                            <input type="text" name='quantity' placeholder="Type here" className="py-1 px-2 rounded border border-base-300 w-full" />
+                            <input {...register('quantity', { required: true })} type="text" name='quantity' placeholder="Type here" className="py-1 px-2 rounded border border-base-300 w-full" />
+                            {errors.quantity?.type === "required" && (<p role="alert">Quantity is required</p>)}
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Order Transection</span>
                             </div>
-                            <select name="orderStatus"
+                            <select
+                                {...register('orderTransection', { required: true })}
                                 className="py-1 px-2 rounded border border-base-300 w-full"
                             >
+                                <option value="">Select Order Transection</option>
                                 <option value="Completed">Completed</option>
-                                <option value="Fail" selected>Fail</option>
+                                <option value="Fail">Fail</option>
                             </select>
+                            {errors.orderTransection?.type === "required" && (<p role="alert">Order Transection is required</p>)}
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Comment</span>
                             </div>
                             <textarea
+                                {...register('comment', { required: true })}
                                 className="py-1 px-2 rounded border border-base-300 w-full"
                                 cols={5} rows={5}
                             >
                             </textarea>
+                            {errors.comment?.type === "required" && (<p role="alert">Comment is required</p>)}
                         </label>
                         <div className='text-start'>
                             <button className='py-2 px-4 bg-orange-400 rounded text-base-200'>Submit</button>

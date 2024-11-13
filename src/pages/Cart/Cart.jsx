@@ -66,8 +66,8 @@ const Cart = () => {
                             setCartData(res.data)
                         })
 
-                            alert('delete success')
-                        }
+                    alert('delete success')
+                }
             })
     }
 
@@ -75,10 +75,10 @@ const Cart = () => {
         <div>
             <SectionTitle heading={`Your Cart (${cart.length} items)`}></SectionTitle>
             <div className='flex flex-row justify-between  items-center border-b-2 border-gray-400 py-3'>
-                <p className='w-5/12 text-center'>Item</p>
-                <p className='w-1/12 '>Price</p>
-                <p className='w-3/12 '>Quantity</p>
-                <p className='w-3/12 '>Total</p>
+                <p className='w-5/12 text-left pl-32 text-base'>Item</p>
+                <p className='w-1/12 text-base'>Price</p>
+                <p className='w-3/12 text-base'>Quantity</p>
+                <p className='w-3/12 text-base'>Total</p>
                 {/* <p className='w-1/12'></p> */}
             </div>
             {
@@ -86,11 +86,11 @@ const Cart = () => {
                     cart.map((item, index) => (
                         <div key={index} className='flex flex-row justify-between items-center  border-b-2 border-gray-400 py-3'>
                             <div className='w-5/12 pl-10 flex flex-row space-x-8 items-center text-justify gap-4 '>
-                                <p className='text-justify '><img src={item.image} alt="image" className="h-12 w-12 object-cover bg-gray-300 rounded" /></p>
-                                <p className='text-justify'>{item.name}</p>
+                                <p className='text-justify text-xs '><img src={item.image} alt="image" className="h-12 w-12 object-cover bg-gray-300 rounded" /></p>
+                                <p className='text-justify v'>{item.name}</p>
                             </div>
-                            <p className='w-1/12'>${item.price}</p>
-                            <p className='w-3/12'>
+                            <p className='w-1/12 text-xs '>${item.price}</p>
+                            <p className='w-3/12 text-xs '>
                                 <input
                                     type="number"
                                     min={1}
@@ -100,7 +100,7 @@ const Cart = () => {
                                     name='quantity'
                                 />
                             </p>
-                            <div className='w-3/12 '>
+                            <div className='w-3/12 text-xs pl-4 '>
                                 <p className=''>${item.price * quantities[index]}</p>
                             </div> {/* Calculate total for each item */}
                             <button className='text-rose-400' title='Delete' onClick={() => handleDeleteCartItem(item._id)}>x</button>
@@ -113,13 +113,16 @@ const Cart = () => {
 
             {/* Display total price of all items in the cart */}
             {/* <div className='flex flex-row-reverse space-x-20 space-x-reverse mr-26'> */}
-            <div className='flex justify-end gap-6 font-semibold mr-28'>
+            <div className='flex justify-end items-center gap-10 text-sm font-semibold mr-28 mt-3'>
+                <div className='text-end '>
+                    <Link to='/checkout'>
+                        <button className="rounded-lg bg-[#49B2FF] px-4 py-2 font-semibold text-white duration-300 hover:scale-105 hover:bg-sky-600" onClick={handleCheckout}>Checkout</button>
+                    </Link>
+                </div>
                 <p>Total:</p>
                 <p>${totalPrice.toFixed(2)}</p> {/* Display the total price */}
             </div>
-            <Link to='/checkout'>
-                <button className='btn btn-success' onClick={handleCheckout}>Checkout</button>
-            </Link>
+
         </div>
     );
 };

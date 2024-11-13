@@ -6,7 +6,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import useUser from '../../hooks/useUser';
 
 const AdminHeader = () => {
-    const {user}=useContext(AuthContext)
+    const {user,refetch}=useContext(AuthContext)
     const email=user?.email
     // console.log(email);
     const {userData}=useUser(email)
@@ -26,7 +26,7 @@ const AdminHeader = () => {
             <div className='flex flex-row gap-2 space-x-reverse  items-center justify-end my-4'>
                 <IoMdNotifications className='text-xl text-orange-500' />
                 <div>
-                    <h3 className='text-xl text-stone-800 font-semibold'>{userData?.name}</h3>
+                    <h3 className='text-base text-stone-800 font-semibold'>{userData?.name}</h3>
                     <div className="dropdown dropdown-bottom dropdown-end">
                     <p tabIndex={0} role="button" className='text-sm text-stone-800 text-orange-300'>Admin Profile</p>
                         <ul tabIndex={0} className="dropdown-content  menu text-center bg-base-100 rounded-box z-[1] w-32 p-2 shadow">

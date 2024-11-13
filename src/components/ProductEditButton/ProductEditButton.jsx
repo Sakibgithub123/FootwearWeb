@@ -82,9 +82,9 @@ const ProductEditButton = ({ id, refetch }) => {
                     {/* Sidebar content here */}
                     <div className="mb-2">
                         <h2 className="text-center text-xl text-orange-500 font-semibold tracking-tight">Update {editProductData.name} Item</h2>
-                        <p className="text-center text-sm text-orange-200 text-zinc-500 dark:text-zinc-400">We&apos;d love to hear from you!</p>
+                        {/* <p className="text-center text-sm text-orange-200 text-zinc-500 dark:text-zinc-400">We&apos;d love to hear from you!</p> */}
                     </div>
-                    <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-3 h-[400px]">
+                    <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-1 h-[400px]">
                         <div className="space-y-1 text-sm text-zinc-700 dark:text-zinc-400">
                             <label className="block font-medium text-left" htmlFor="name">
                                 Name
@@ -143,6 +143,8 @@ const ProductEditButton = ({ id, refetch }) => {
                                     <option value="Blue">Blue</option>
                                     <option value="Pink">Pink</option>
                                     <option value="Brown">Brown</option>
+                                    <option value="Purple">Purple</option>
+                                    <option value="Gray">Gray</option>
                                 </select>
                                 {errors.color?.type === "required" && (<p role="alert">Color is required</p>)}
                             </div>
@@ -228,8 +230,8 @@ const ProductEditButton = ({ id, refetch }) => {
                             <input type="file"  {...register('image', { required: true })} className="file-input file-input-bordered h-10 w-full " />
                             {errors.image?.type === "required" && (<p role="alert">Image is required</p>)}
                         </div>
-                        <div className='py-1'>
-                            <input type="submit" className="rounded-md bg-orange-500 px-3 py-1  text-white transition-colors hover:bg-sky-600 dark:bg-sky-700" value={'UPDATE'} />
+                        <div className='py-1 text-end'>
+                            <input type="submit" className="rounded-md bg-orange-500 px-3 py-1  text-white transition-colors hover:bg-orange-300 dark:bg-orange-700" value={'UPDATE'} />
                         </div>
                     </form>
                 </ul>

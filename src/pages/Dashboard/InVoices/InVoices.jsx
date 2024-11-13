@@ -23,7 +23,7 @@ const InVoices = () => {
     const subTotal=order?.totalPrice
     const total=tax+subTotal
     return (
-        <div>
+        <div className='ml-3'>
             <h1 className='text-left text-stone-950 p-2 text-2xl font-bold border border-b-base-200 border-t-0'>Invoices</h1>
             <div className='bg-base-200 p-20 max-w-4xl mx-auto mt-6 rounded'>
                 <div className='flex justify-between border border-stone-200 py-4 border-t-0 border-l-0 border-r-0'>
@@ -94,19 +94,19 @@ const InVoices = () => {
                             }
                         </tbody>
                     </table>
-                    <div className='flex justify-end mr-8'>
+                    <div className='flex justify-end mr-10 mt-2'>
                         <div className='w-4/12 space-y-4'>
                             <div className='flex justify-between border border-stone-200 border-t-0 border-l-0 border-r-0'>
-                                <span className='font-bold text-base'>Subtotal:</span>
-                                <span className='font-extralight text-base'>${order?.totalPrice}</span>
+                                <span className='font-bold text-sm'>Subtotal:</span>
+                                <span className='font-extralight text-sm'>${order?.totalPrice}</span>
                             </div>
                             <div className='flex justify-between border border-stone-200 border-t-0 border-l-0 border-r-0'>
-                                <span className='font-bold text-base'>Tax(18%):</span>
-                                <span className='font-extralight text-base'>${tax}</span>
+                                <span className='font-bold text-sm'>Tax(18%):</span>
+                                <span className='font-extralight text-sm'>${tax}</span>
                             </div>
                             <div className='flex justify-between border border-stone-200 border-t-0 border-l-0 border-r-0'>
-                                <span className='font-bold text-base'>Total:</span>
-                                <span className='font-bold text-base'>${total}</span>
+                                <span className='font-bold text-sm'>Total:</span>
+                                <span className='font-bold text-sm'>${total}</span>
                             </div>
                         </div>
                     </div>
