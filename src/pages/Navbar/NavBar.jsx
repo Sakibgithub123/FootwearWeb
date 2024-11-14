@@ -20,6 +20,8 @@ const NavBar = () => {
         {/* <div className="badge t-1">+99</div> */}
       </NavLink></li>
       <li className="text-white"><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
+      <li className="text-white"><NavLink to={'/about'}>About Us</NavLink></li>
+      
 
     </>
 
@@ -62,7 +64,7 @@ const NavBar = () => {
                 <li><a>Submenu 2</a></li>
               </ul>
             </li>
-            <li><a>Item 3</a></li>
+            <li className="text-white"><NavLink to={'/contact'}>Contact</NavLink></li><li><a>Item 3</a></li>
           </ul>
         </div>
         <a className="btn btn-ghost text-xl font-black text-orange-400">FootWear</a>
@@ -79,7 +81,7 @@ const NavBar = () => {
               </ul>
             </details>
           </li>
-          <li><a>Item 3</a></li>
+          <li className="text-white"><NavLink to={'/contact'}>Contact</NavLink></li>
         </ul>
       </div>
       <div className="navbar-end gap-3 font-semibold">

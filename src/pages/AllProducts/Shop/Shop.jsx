@@ -13,9 +13,9 @@ const Shop = () => {
     const [color, setColor] = useState('');
     const [priceRange, setPriceRange] = useState([0, 100]);
     const [products, setProducts] = useState([]);
-    const { pathname } = useLocation()
-    console.log(pathname);
-    console.log(category);
+    // const { pathname } = useLocation()
+    // console.log(pathname);
+    // console.log(category);
 
     useEffect(() => {
         fetch('http://localhost:5000/category')

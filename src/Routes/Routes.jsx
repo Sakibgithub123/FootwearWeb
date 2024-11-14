@@ -25,6 +25,8 @@ import OrderDetails from "../pages/Dashboard/Order/OrderDetails/OrderDetails";
 import InVoices from "../pages/Dashboard/InVoices/InVoices";
 import EmailInvoices from "../pages/Dashboard/InVoices/EmailInvoices";
 import Profile from "../pages/Dashboard/Profile/Profile";
+import Contact from "../pages/Contact/Contact";
+import AboutUs from "../pages/AboutUs/AboutUs";
 
 
 export const router = createBrowserRouter([
@@ -61,6 +63,14 @@ export const router = createBrowserRouter([
             {
                 path:'/signup',
                 element:<SignUp></SignUp>
+            },
+            {
+                path:'/about',
+                element:<AboutUs></AboutUs>
+            },
+            {
+                path:'/contact',
+                element:<Contact></Contact>
             },
         
         ]
