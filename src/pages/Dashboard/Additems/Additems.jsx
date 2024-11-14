@@ -17,6 +17,22 @@ const Additems = () => {
     const [category, brand] = useCategoryBrand()
     const [products, refetch] = useAllProducts()
     // console.log(products);
+    //pagination
+    const [pageNumber, setPageNumber] = useState(0);
+    const itemsPerPage = 5; // Adjust the page numbers the way you want
+    // Calculate the total number of pages
+     const totalPages=Math.ceil(products.length/itemsPerPage)
+// Get the products to display on the current page
+     const paginatedProducts=products.slice(pageNumber*itemsPerPage,(pageNumber+1)*itemsPerPage)
+    const updatePageNumber = (num) => {
+        if (num >=0 && num<totalPages) {
+            setPageNumber(num);
+        }
+        
+    };
+
+
+    //end pagination
 
 
     const imageBBApiKey = import.meta.env.VITE_imageBB_api
@@ -274,7 +290,7 @@ const Additems = () => {
                     </thead>
                     <tbody>
                         {
-                            products.map((product) =>
+                            paginatedProducts.map((product) =>
                                 <tr key={product._id} className="hover:bg-gray-50 border-b transition duration-300">
                                     <td className="py-3 px-3 border-b border-orange-400">
                                         <img src={product.image} alt="image" className="h-12 w-12 object-cover bg-gray-300 rounded" />
@@ -301,6 +317,86 @@ const Additems = () => {
                 </table>
             </div>
 
+            {/* //pagination
+            <div className="mx-auto mt-5 flex w-fit select-none items-center justify-center divide-x divide-zinc-500 overflow-hidden rounded-sm border border-zinc-500 bg-white dark:bg-gray-700">
+                
+                <button
+                    disabled={pageNumber === 0}
+                    onClick={() => {
+                        updatePageNumber(pageNumber - 1);
+                    }}
+                    className="w-20 cursor-pointer px-3 py-2 text-center text-sm outline-none transition-all duration-200 hover:bg-gray-500/20 disabled:bg-zinc-500 disabled:text-white "
+                >
+                    Previous
+                </button>
+                <div className="flex items-center justify-center divide-x divide-zinc-500">
+                    {[...Array(totalPages).keys()].map((item, index) => (
+                        <div
+                        key={index}
+                            onClick={() => {
+                                updatePageNumber(index);
+                            }}
+                            className={`cursor-pointer px-4 text-sm  transition-all duration-200 ${pageNumber === index ? 'bg-zinc-500 text-white' : 'hover:bg-gray-500/20'}  py-[8px] font-semibold`}
+                            
+                        >
+                            {index + 1}
+                        </div>
+                    ))}
+                </div>
+               
+                <button
+                    disabled={pageNumber === totalPages - 1}
+                    onClick={() => {
+                        updatePageNumber(pageNumber + 1);
+                    }}
+                    className="w-20 cursor-pointer px-3 py-2 text-center text-sm outline-none transition-all duration-200 hover:bg-gray-500/20 disabled:bg-zinc-500 disabled:text-white"
+                >
+                    Next
+                </button>
+            </div> */}
+
+            {/* pagination2  */}
+               {/* Pagination controls */}
+        <div className="mx-auto mt-5 flex w-fit select-none items-center justify-center divide-x divide-zinc-500 overflow-hidden rounded-sm border border-zinc-500 bg-white dark:bg-gray-700">
+            {/* Previous button */}
+            <button
+                disabled={pageNumber === 0}
+                onClick={() => updatePageNumber(pageNumber - 1)}
+                className="w-20 cursor-pointer px-3 py-2 text-center text-sm outline-none transition-all duration-200 hover:bg-gray-500/20 disabled:bg-zinc-500 disabled:text-white"
+            >
+                Previous
+            </button>
+
+            {/* Page number buttons */}
+            <div className="flex items-center justify-center divide-x divide-zinc-500">
+                {Array.from({ length: 6 }).map((_, index) => {
+                    const page = pageNumber + index;
+                    if (page < totalPages) {
+                        return (
+                            <div
+                                key={page}
+                                onClick={() => updatePageNumber(page)}
+                                className={`cursor-pointer px-4 text-sm transition-all duration-200 ${
+                                    pageNumber === page ? 'bg-zinc-500 text-white' : 'hover:bg-gray-500/20'
+                                } py-[8px] font-semibold`}
+                            >
+                                {page + 1}
+                            </div>
+                        );
+                    }
+                    return null;
+                })}
+            </div>
+
+            {/* Next button */}
+            <button
+                disabled={pageNumber === totalPages - 1}
+                onClick={() => updatePageNumber(pageNumber + 1)}
+                className="w-20 cursor-pointer px-3 py-2 text-center text-sm outline-none transition-all duration-200 hover:bg-gray-500/20 disabled:bg-zinc-500 disabled:text-white"
+            >
+                Next
+            </button>
+        </div>
         </div>
     );
 };
