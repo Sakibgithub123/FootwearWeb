@@ -78,43 +78,43 @@ const ProductEditButton = ({ id, refetch }) => {
             </div>
             <div className="drawer-side z-10 ">
                 <label htmlFor={`my-drawer-${id}`} aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-base-200 text-base-content min-h-full max-w-md p-4 overflow-y-auto">
+                <ul className="menu bg-base-200 text-base-content min-h-full w-9/12 max-w-md p-4 overflow-y-auto">
                     {/* Sidebar content here */}
                     <div className="mb-2">
-                        <h2 className="text-center text-xl text-orange-500 font-semibold tracking-tight">Update {editProductData.name} Item</h2>
-                        {/* <p className="text-center text-sm text-orange-200 text-zinc-500 dark:text-zinc-400">We&apos;d love to hear from you!</p> */}
+                        <h2 className="text-center text-sm md:text-2xl text-orange-500 font-semibold tracking-tight">Update {editProductData.name}</h2>
+                        {/* <p className="text-center text-[10px] md:text-sm text-orange-200 text-zinc-500 dark:text-zinc-400">We&apos;d love to hear from you!</p> */}
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-1 h-[400px]">
-                        <div className="space-y-1 text-sm text-zinc-700 dark:text-zinc-400">
+                        <div className="space-y-1 text-[10px] md:text-sm text-zinc-700 dark:text-zinc-400">
                             <label className="block font-medium text-left" htmlFor="name">
                                 Name
                             </label>
                             <input
-                                className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
+                                className="h-10 w-full rounded border px-3 py-2 text-[10px] md:text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
                                 type="text"
                                 {...register("name", { required: true })}
                             />
                             {errors.name?.type === "required" && (<p role="alert">Name is required</p>)}
                         </div>
                         <div className="flex flex-row space-x-2">
-                            <div className="space-y-1 text-sm text-zinc-700 dark:text-zinc-400 flex-1">
+                            <div className="space-y-1 text-[10px] md:text-sm text-zinc-700 dark:text-zinc-400 flex-1">
                                 <label className="block font-medium text-left" htmlFor="price">
                                     Price
                                 </label>
                                 <input
                                     {...register('price', { required: true })}
-                                    className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
+                                    className="h-10 w-full rounded border px-3 py-2 text-[10px] md:text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
                                     type="number"
                                 />
                                 {errors.price?.type === "required" && (<p role="alert">Price is required</p>)}
                             </div>
-                            <div className="space-y-1 text-sm text-zinc-700 dark:text-zinc-400 flex-1">
+                            <div className="space-y-1 text-[10px] md:text-sm text-zinc-700 dark:text-zinc-400 flex-1">
                                 <label className="block font-medium text-left" htmlFor="category">
                                     Category
                                 </label>
                                 <select
                                     {...register('category', { required: true })}
-                                    className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
+                                    className="h-10 w-full rounded border px-3 py-2 text-[10px] md:text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
                                 >
                                     {
                                         category.map(categories =>
@@ -125,13 +125,13 @@ const ProductEditButton = ({ id, refetch }) => {
                             </div>
                         </div >
                         <div className="flex flex-row space-between space-x-2">
-                            <div className="space-y-1 text-sm text-zinc-700 dark:text-zinc-400 flex-1">
+                            <div className="space-y-1 text-[10px] md:text-sm text-zinc-700 dark:text-zinc-400 flex-1">
                                 <label className="block font-medium text-left" htmlFor="color">
                                     Color
                                 </label>
                                 <select
                                     {...register('color', { required: true })}
-                                    className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
+                                    className="h-10 w-full rounded border px-3 py-2 text-[10px] md:text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
                                 >
                                     <option value="Red">Red</option>
                                     <option value="Green">Green</option>
@@ -148,13 +148,13 @@ const ProductEditButton = ({ id, refetch }) => {
                                 </select>
                                 {errors.color?.type === "required" && (<p role="alert">Color is required</p>)}
                             </div>
-                            <div className="space-y-1 text-sm text-zinc-700 dark:text-zinc-400 flex-1">
+                            <div className="space-y-1 text-[10px] md:text-sm text-zinc-700 dark:text-zinc-400 flex-1">
                                 <label className="block font-medium text-left" htmlFor="brand">
                                     Brand
                                 </label>
                                 <select
                                     {...register('brand', { required: true })}
-                                    className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
+                                    className="h-10 w-full rounded border px-3 py-2 text-[10px] md:text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
                                 >
                                     {
                                         brand.map(brands =>
@@ -165,13 +165,13 @@ const ProductEditButton = ({ id, refetch }) => {
                             </div>
                         </div>
                         <div className="flex flex-row space-x-2">
-                            <div className="space-y-1 text-sm text-zinc-700 dark:text-zinc-400 flex-1">
+                            <div className="space-y-1 text-[10px] md:text-sm text-zinc-700 dark:text-zinc-400 flex-1">
                                 <label className="block font-medium text-left" htmlFor="category">
                                     Type
                                 </label>
                                 <select
                                     {...register('type', { required: true })}
-                                    className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
+                                    className="h-10 w-full rounded border px-3 py-2 text-[10px] md:text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
                                 >
                                     <option value="Running">Running</option>
                                     <option value="Hiking">Hiking</option>
@@ -184,13 +184,13 @@ const ProductEditButton = ({ id, refetch }) => {
                                 </select>
                                 {errors.type?.type === "required" && (<p role="alert">Type is required</p>)}
                             </div>
-                            <div className="space-y-1 text-sm text-zinc-700 dark:text-zinc-400 flex-1">
+                            <div className="space-y-1 text-[10px] md:text-sm text-zinc-700 dark:text-zinc-400 flex-1">
                                 <label className="block font-medium text-left" htmlFor="category">
                                     Status
                                 </label>
                                 <select
                                     {...register('status', { required: true })}
-                                    className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
+                                    className="h-10 w-full rounded border px-3 py-2 text-[10px] md:text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
                                 >
                                     <option value="Trending">Trending</option>
                                     <option value="Popular">Popular</option>
@@ -200,19 +200,19 @@ const ProductEditButton = ({ id, refetch }) => {
                                 {errors.status?.type === "required" && (<p role="alert">Status is required</p>)}
                             </div>
                         </div>
-                        <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-400">
+                        <div className="space-y-2 text-[10px] md:text-sm text-zinc-700 dark:text-zinc-400">
                             <label className="block font-medium text-left" htmlFor="price">
                                 Available Quantity
                             </label>
                             <input
                                 {...register('quantity', { required: true })}
-                                className="h-10 w-full rounded border px-3 py-2 text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
+                                className="h-10 w-full rounded border px-3 py-2 text-[10px] md:text-sm leading-tight focus:outline-none focus:ring-1 dark:border-zinc-700"
                                 placeholder="Enter Quantity"
                                 type="number"
                             />
                             {errors.quantity?.type === "required" && (<p role="alert">Quantity is required</p>)}
                         </div>
-                        <div className="space-y-1 text-sm text-zinc-700 dark:text-zinc-400">
+                        <div className="space-y-1 text-[10px] md:text-sm text-zinc-700 dark:text-zinc-400">
                             <label className="block font-medium text-left" htmlFor="_description">
                                 Description
                             </label>
@@ -222,7 +222,7 @@ const ProductEditButton = ({ id, refetch }) => {
                             />
                             {errors.description?.type === "required" && (<p role="alert">Description is required</p>)}
                         </div>
-                        <div className="space-y-1 text-sm text-zinc-700 dark:text-zinc-400">
+                        <div className="space-y-1 text-[10px] md:text-sm text-zinc-700 dark:text-zinc-400">
                             <label className="block font-medium text-left" htmlFor="image">
                                 Image
                             </label>
@@ -231,7 +231,7 @@ const ProductEditButton = ({ id, refetch }) => {
                             {errors.image?.type === "required" && (<p role="alert">Image is required</p>)}
                         </div>
                         <div className='py-1 text-end'>
-                            <input type="submit" className="rounded-md bg-orange-500 px-3 py-1  text-white transition-colors hover:bg-orange-300 dark:bg-orange-700" value={'UPDATE'} />
+                            <input type="submit" className="rounded-md text-[10px] md:text-sm bg-orange-500 px-3 py-1  text-white transition-colors hover:bg-orange-300 dark:bg-orange-700" value={'UPDATE'} />
                         </div>
                     </form>
                 </ul>

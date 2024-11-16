@@ -27,6 +27,8 @@ import EmailInvoices from "../pages/Dashboard/InVoices/EmailInvoices";
 import Profile from "../pages/Dashboard/Profile/Profile";
 import Contact from "../pages/Contact/Contact";
 import AboutUs from "../pages/AboutUs/AboutUs";
+import WishList from "../pages/UsersAccessibility/WishList";
+import MyOrders from "../pages/UsersAccessibility/MyOrders";
 
 
 export const router = createBrowserRouter([
@@ -67,6 +69,14 @@ export const router = createBrowserRouter([
             {
                 path:'/about',
                 element:<AboutUs></AboutUs>
+            },
+            {
+                path:'/myOrders',
+                element:<MyOrders></MyOrders>
+            },
+            {
+                path:'/wishlist',
+                element:<WishList></WishList>
             },
             {
                 path:'/contact',

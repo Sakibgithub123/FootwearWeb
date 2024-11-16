@@ -76,7 +76,7 @@ const CartButton = ({ id, item }) => {
     // console.log(name, price, description);
     return (
         <div>
-            <button onClick={() => handleAddToCart(item)} className="rounded-lg bg-gray-400 px-4 py-2 font-semibold text-white duration-300 hover:scale-95 hover:bg-gray-600">Add to Cart</button>
+            <button onClick={() => handleAddToCart(item)} className="rounded-lg text-[10px] md:text-sm bg-gray-400 px-4 py-2 font-semibold text-white duration-300 hover:scale-95 hover:bg-gray-600">Add to Cart</button>
         </div>
         // <form onSubmit={handleAddToCart}>
         /* <input type="text" value={cart?.name} name='name' />

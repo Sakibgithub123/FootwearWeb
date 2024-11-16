@@ -4,13 +4,13 @@ import SectionTitle from '../../components/SectionTitle/SectionTitle';
 const AboutUs = () => {
     return (
         <div>
-            <div>
+            <div className='mt-5 md:mt-0'>
                 <img src={aboutaImg} alt="about img" />
             </div>
             <div className='max-w-4xl mx-auto'>
                 {/* <h2 className='text-orange-300 pt-10 pb-5 text-semibold text-xl'>About</h2> */}
                 <SectionTitle heading={'About'}></SectionTitle>
-                <p className='text-justify text-sm intend-1.5 text-stone-500'>
+                <p className='text-justify text-xs md:text-sm intend-1.5 text-stone-500'>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Aliquid fugiat temporibus vitae minus hic magnam recusandae sapiente magni
                     commodi tempora est doloribus iure ducimus nam vero dignissimos porro illo,

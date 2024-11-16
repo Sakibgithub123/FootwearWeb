@@ -141,10 +141,10 @@ const Checkout = () => {
                             {
                                 cart && cart.map((item, index) =>
                                     <div key={index} className="space-y-4">
-                                        <div className="flex items-center justify-between">
-                                            <p>{item.name}</p>
-                                            <p>{quantities[index]}</p>
-                                            <p>${item.price * quantities[index]}</p>
+                                        <div className="flex items-center  justify-between">
+                                            <p className='w-8/12 text-left'>{item.name}</p>
+                                            <p className='w-1/12'>{quantities?.[index]}</p>
+                                            <p className='w-3/12'>${parseFloat(item.price * quantities[index])}.00</p>
                                         </div>
                                         {/* <div className="flex justify-between"><span>Product 2</span><span>$49.99</span></div>
                         <div className="flex justify-between"><span>Product 3</span><span>$29.99</span></div> */}

@@ -13,14 +13,14 @@ const NavBar = () => {
 
   const nav =
     <>
-      <li className="text-white"><NavLink to={'/'}>Home</NavLink></li>
-      <li className="text-white"><NavLink to={'/shop'}>Shop</NavLink></li>
-      <li className="text-white"><NavLink to={'/cart'}>
+      <li className="text-white text-xs md:text-base"><NavLink className="text-xs md:text-base" to={'/'}>Home</NavLink></li>
+      <li className="text-white text-xs md:text-base"><NavLink className="text-xs md:text-base"  to={'/shop'}>Shop</NavLink></li>
+      <li className="text-white text-xs md:text-base"><NavLink className="text-xs md:text-base"  to={'/cart'}>
         Cart <span>({cart.length})</span>
         {/* <div className="badge t-1">+99</div> */}
       </NavLink></li>
-      <li className="text-white"><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
-      <li className="text-white"><NavLink to={'/about'}>About Us</NavLink></li>
+      <li className="text-white text-xs md:text-base"><NavLink className="text-xs md:text-base"  to={'/dashboard'}>Dashboard</NavLink></li>
+      <li className="text-white text-xs md:text-base"><NavLink className="text-xs md:text-base"  to={'/about'}>About Us</NavLink></li>
       
 
     </>
@@ -55,46 +55,46 @@ const NavBar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content font-semibold bg-base-100  rounded-box z-[1] mt-3 w-52 p-2 shadow">
+            className="menu menu-sm text-xs md:text-base dropdown-content font-semibold bg-red-700  rounded-box z-[50] mt-3 w-40 p-2 shadow">
             {nav}
-            <li>
-              <a >Parent</a>
-              <ul className="p-2">
-                <li><a>Submenu 1</a></li>
-                <li><a>Submenu 2</a></li>
+            <li className="dropdown">
+              <a className="text-xs md:text-base" >My Account</a>
+              <ul className="p-2 z-50 ">
+                <li><NavLink className='link link-hover text-xs md:text-base' to={'/myOrders'}>My Orders</NavLink></li>
+                <li><NavLink className='link link-hover text-xs md:text-base' to={'wishlist'}>My Wishlist</NavLink></li>
               </ul>
             </li>
-            <li className="text-white"><NavLink to={'/contact'}>Contact</NavLink></li><li><a>Item 3</a></li>
+            <li className="text-white"><NavLink className="text-xs md:text-base"  to={'/contact'}>Contact</NavLink></li><li><a>Item 3</a></li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl font-black text-orange-400">FootWear</a>
+        <a className="btn btn-ghost text-sm -ml-16 md:-ml-0 -mt-10 md:-mt-0 italic md:text-left md:text-xl font-black text-orange-400">FootWear</a>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 font-semibold">
+      <div className="navbar-center hidden  lg:flex">
+        <ul className="menu menu-horizontal px-1 font-semibold bg-red-700 text-xs md:text-base">
           {nav}
           <li className="text-white">
             <details>
-              <summary>Parent</summary>
-              <ul className="p-2">
-                <li><a>Submenu 1</a></li>
-                <li><a>Submenu 2</a></li>
+              <summary>My Account</summary>
+              <ul className="p-2 z-50 bg-red-700">
+              <li><NavLink  className='link link-hover text-xs md:text-base' to={'/myOrders'}>My Orders</NavLink></li>
+              <li><NavLink  className='link link-hover text-xs md:text-base' to={'wishlist'}>My Wishlist</NavLink></li>
               </ul>
             </details>
           </li>
-          <li className="text-white"><NavLink to={'/contact'}>Contact</NavLink></li>
+          <li className="text-white"><NavLink className="text-xs md:text-base"  to={'/contact'}>Contact</NavLink></li>
         </ul>
       </div>
       <div className="navbar-end gap-3 font-semibold">
         {
           user ?
             <>
-              <p>{user?.displayName}</p>
-              <button onClick={handleSignOut} className="py-2 px-4 bg-orange-400 rounded text-white">Log Out</button>
+              <p className="text-[10px] md:text-sm">{user?.displayName}</p>
+              <button onClick={handleSignOut} className="py-1 md:py-2 px-2 md:px-4 text-[10px] md:text-sm  bg-orange-400 rounded text-white">Log Out</button>
             </>
             :
             <>
-              <Link to={'/login'}><button className="py-2 px-4 bg-orange-400 rounded text-white">Log In</button></Link>
-              <Link to={'/signup'}> <button className="py-2 px-4 bg-orange-400 rounded text-white">Sign Up</button></Link>
+              <Link to={'/login'}><button className="py-2 px-4 text-[10px] md:text-sm bg-orange-400 rounded text-white">Log In</button></Link>
+              <Link to={'/signup'}> <button className="py-2 px-4 text-[10px] md:text-sm bg-orange-400 rounded text-white">Sign Up</button></Link>
 
             </>
 

@@ -11,7 +11,7 @@ const EmailInvoices = () => {
     // const [email]= orders.cart
     return (
         <div>
-            <h1 className='text-left text-stone-950 p-2 text-2xl font-bold border border-b-base-200 border-t-0'>Invoices</h1>
+            <h1 className='text-left text-stone-950 p-2 text-sm md:text-2xl font-bold border border-b-base-200 border-t-0'>Invoices</h1>
             <div className='max-w-96 mx-auto mt-8'>
                 <div className='bg-base-200 p-10 space-y-4'>
                     <h3 className='text-2xl font-bold text-stone-950'>$389.00 Paid</h3>

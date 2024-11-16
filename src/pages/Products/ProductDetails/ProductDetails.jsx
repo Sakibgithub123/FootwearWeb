@@ -66,26 +66,26 @@ const ProductDetails = () => {
     }
     return (
         <div>
-            <div className='flex flex-row justify-evenly ml-20 my-5'>
+            <div className='flex flex-col md:flex-row justify-evenly md:ml-20 my-5'>
                 <div >
                     <img className='w-[500px] h-[300px] rounded border' src={products?.image} alt="" />
                 </div>
-                <div className='flex flex-col justify-center text-justify  space-y-3 '>
-                    <h1 className='text-lg font-bold'>{products.name}</h1>
-                    <p className='text-sm text-orange-400 font-medium'>Price: ${products.price}</p>
-                    <p className='text-base font-medium'>Category:{products.category}</p>
-                    <p className='text-base font-medium'>Availability: In Stock</p>
+                <div className='flex flex-col justify-center md:text-justify mt-5 md:mt-0  space-y-3 '>
+                    <h1 className='text-sm md:text-lg font-bold'>{products.name}</h1>
+                    <p className='text-xs md:text-sm text-orange-400 font-medium'>Price: ${products.price}</p>
+                    <p className='text-xs md:text-base font-medium'>Category:{products.category}</p>
+                    <p className='text-xs md:text-base font-medium'>Availability: In Stock</p>
                     <p className='text-xs'>{products.description}</p>
                     <CartButton id={products._id} item={products}></CartButton>
                 </div>
             </div>
             <SectionTitle heading={'Reviews'}></SectionTitle>
             <h4 className='text-left mb-2 underline'>Reviews({reviews?.length})</h4>
-            <div className='flex flex-row gap-5'>
+            <div className='flex flex-col-reverse md:flex-row gap-5'>
                 {
                     reviews.length > 0 ?
                         reviews.map((review, index) =>
-                            <div key={index} className='text-justify w-6/12'>
+                            <div key={index} className='text-justify my-4 md:w-6/12'>
                                 <div className='flex flex-row gap-3 items-center'>
                                     <div className="avatar">
                                         <div className="w-24 rounded-full">
@@ -116,14 +116,14 @@ const ProductDetails = () => {
                             </div>
                         )
                         :
-                        <div className='text-justify w-6/12'>
+                        <div className='text-justify md:w-6/12'>
                             <p className='text-lg'>No Reviews Yet</p>
                         </div>
                 }
 
-                <div className='w-6/12 space-y-4'>
-                    <h3 className='text-Center'>Add A Review</h3>
-                    <form onSubmit={handleSubmit(onSubmit)} className='space-y-1' action="">
+                <div className='md:w-6/12 space-y-4'>
+                    <h3 className='text-Center text-xs md:text-sm'>Add A Review</h3>
+                    <form onSubmit={handleSubmit(onSubmit)} className='space-y-1 text-[10px] md:text-sm'>
                         <div className='relative w-full'>
                             <input type="text" {...register("name", { required: "Name is required" })} className='border py-1 px-2 border-[black] w-full' placeholder='Your Full Name' />
                             {errors.name && <p role="alert">{errors.name?.message}</p>}
@@ -151,7 +151,7 @@ const ProductDetails = () => {
                             {errors.rating && <p role="alert">{errors.rating?.message}</p>}
                         </div>
                         <div className='text-right'>
-                            <button type='submit' className='py-2 px-4 bg-orange-400 text-white '>Submit</button>
+                            <button type='submit' className='py-2 px-4 text-[10px] md:text-sm bg-orange-400 text-white '>Submit</button>
                         </div>
 
                     </form>

@@ -43,7 +43,10 @@ const Cart = () => {
     };
 
     // Calculate the total price of the cart items
-    const totalPrice = cart.reduce((acc, item, index) => acc + (item.price * quantities[index]), 0);
+    const totalCartPrice = cart.reduce((acc, item, index) => acc + (item.price * quantities[index]), 0);
+    const tax = 59.4
+    const deliveryCharge = 20.00
+    const totalPrice = totalCartPrice + tax + deliveryCharge;
     const handleCheckout = () => {
         const checkoutData = {
             cart,
@@ -74,33 +77,33 @@ const Cart = () => {
     return (
         <div>
             <SectionTitle heading={`Your Cart (${cart.length} items)`}></SectionTitle>
-            <div className='flex flex-row justify-between  items-center border-b-2 border-gray-400 py-3'>
-                <p className='w-5/12 text-left pl-32 text-base'>Item</p>
-                <p className='w-1/12 text-base'>Price</p>
-                <p className='w-3/12 text-base'>Quantity</p>
-                <p className='w-3/12 text-base'>Total</p>
+            <div className='flex  justify-between  items-center border-b-2 border-gray-400 py-3'>
+                <p className='md:w-5/12 md:text-left pl-10 md:pl-32 text-xs md:text-base'>Item</p>
+                <p className='md:w-1/12 pl-6 md:pl-0 text-xs md:text-base'>Price</p>
+                <p className='md:w-3/12 text-xs md:text-base'>Quantity</p>
+                <p className='md:w-3/12 text-xs md:text-base'>Total</p>
                 {/* <p className='w-1/12'></p> */}
             </div>
             {
                 Array.isArray(cart) && cart.length > 0 ? (
                     cart.map((item, index) => (
-                        <div key={index} className='flex flex-row justify-between items-center  border-b-2 border-gray-400 py-3'>
-                            <div className='w-5/12 pl-10 flex flex-row space-x-8 items-center text-justify gap-4 '>
+                        <div key={index} className='flex  justify-between items-center  border-b-2 border-gray-400 py-3'>
+                            <div className='w-24 md:w-5/12 md:pl-10 flex flex-row md:space-x-8 items-center text-justify gap-4 '>
                                 <p className='text-justify text-xs '><img src={item.image} alt="image" className="h-12 w-12 object-cover bg-gray-300 rounded" /></p>
-                                <p className='text-justify v'>{item.name}</p>
+                                <p className='text-justify text-xs'>{item.name}</p>
                             </div>
-                            <p className='w-1/12 text-xs '>${item.price}</p>
-                            <p className='w-3/12 text-xs '>
+                            <p className='md:w-1/12 text-xs '>${item.price}</p>
+                            <p className='w:8 md:w-3/12 text-xs '>
                                 <input
                                     type="number"
                                     min={1}
                                     value={quantities[index]} // Use the individual quantity for this item
                                     onChange={(e) => handleQtyChange(e, index)} // Update quantity for the specific item
-                                    className='border py-1 px-4 my-1'
+                                    className='border py-1 px-2 md:px-4 my-1 w-8 md:w-3/12'
                                     name='quantity'
                                 />
                             </p>
-                            <div className='w-3/12 text-xs pl-4 '>
+                            <div className='md:w-3/12 text-xs md:pl-4 '>
                                 <p className=''>${item.price * quantities[index]}</p>
                             </div> {/* Calculate total for each item */}
                             <button className='text-rose-400' title='Delete' onClick={() => handleDeleteCartItem(item._id)}>x</button>
@@ -113,17 +116,36 @@ const Cart = () => {
 
             {/* Display total price of all items in the cart */}
             {/* <div className='flex flex-row-reverse space-x-20 space-x-reverse mr-26'> */}
-            <div className='flex justify-end items-center gap-10 text-sm font-semibold mr-28 mt-3'>
-                <div className='text-end '>
-                    <Link to='/checkout'>
-                        <button className="rounded-lg bg-[#49B2FF] px-4 py-2 font-semibold text-white duration-300 hover:scale-105 hover:bg-sky-600" onClick={handleCheckout}>Checkout</button>
-                    </Link>
+            <div className='flex md:justify-end items-center font-semibold mx-8 md:mr-32 mt-3'>
+                <div className='space-y-2 w-96'>
+                    <div className='flex justify-between text-xs'>
+                        <p>Subtotal:</p>
+                        <p>${totalCartPrice}</p>
+                    </div>
+                    <div className='flex justify-between text-xs'>
+                        <p>Tax:</p>
+                        <p>${tax}</p>
+                    </div>
+                    <div className='flex justify-between text-xs'>
+                        <p>Delivery Charge:</p>
+                        <p>${deliveryCharge}</p>
+                    </div>
+                    <div className='flex justify-between text-sm border-t pt-2'>
+                        <p>Total:</p>
+                        <p>${totalPrice.toFixed(2)}</p> {/* Display the total price */}
+                    </div>
+                    <div className='flex justify-end items-center gap-10 text-sm font-semibold mr-28 mt-3'>
+                        <div className='text-end '>
+                            <Link to='/checkout'>
+                                <button className="rounded-lg text-[10px] md:text-sm bg-[#49B2FF] px-4 py-2 font-semibold text-white duration-300 hover:scale-105 hover:bg-sky-600" onClick={handleCheckout}>Checkout</button>
+                            </Link>
+                        </div>
+                    </div>
                 </div>
-                <p>Total:</p>
-                <p>${totalPrice.toFixed(2)}</p> {/* Display the total price */}
             </div>
-
         </div>
+
+
     );
 };
 

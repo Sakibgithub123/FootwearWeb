@@ -4,11 +4,21 @@ import CartButton from '../../../components/CartButton/CartButton';
 import { SiBrandfolder } from 'react-icons/si';
 import { BiSolidCategory } from 'react-icons/bi';
 import useAxiousSecure from '../../../hooks/useAxiousSecure';
+import Pagination from '../../../components/Pagination/Pagination';
 
 const ProductBar = ({ products, noProducts }) => {
     const axiousSecure = useAxiousSecure()
     // const [search, setSearch] = useState(0)
     const [searchTerm, setSearch] = useState('')
+    //pagination
+    const [pageNumber, setPageNumber] = useState(0);
+    const itemsPerPage = 6; // Adjust the page numbers the way you want
+    // Calculate the total number of pages
+    const totalPages = Math.ceil(products.length / itemsPerPage)
+
+    // Get the products to display on the current page
+    const allProducts = products.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage)
+    //end pagination
 
     //  serch from database  using it
     // const handleChangeName = async (e) => {
@@ -28,20 +38,29 @@ const ProductBar = ({ products, noProducts }) => {
 
     // serch from product value use it
     const handleChangeName = async (e) => {
-            const name = e.target.value
-            if(name){
-                setSearch(name)
-            }else{
-                setSearch("") 
-            }
+        const name = e.target.value
+        if (name) {
+            setSearch(name)
+        } else {
+            setSearch("")
+        }
     }
 
-    const search =useMemo(()=>{
-        // const targetName = e.target.value
-        const searchPr=products.filter(product=>product.name.toLowerCase().includes(searchTerm.toLowerCase()))
-        return searchPr
+    // const search = useMemo(() => {
+    //     const searchPr = products.filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    //     return searchPr.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage)
 
-    },[searchTerm,products])
+    // }, [searchTerm, products])
+
+    const search = useMemo(() => {
+        const searchPr = products.filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        return searchPr.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage)
+
+    }, [searchTerm, allProducts])
+
+
+
+
     return (
         <div>
             <h3 className='bg-gray-500 p-2 w-full'>
@@ -61,23 +80,23 @@ const ProductBar = ({ products, noProducts }) => {
             </h3>
             {
 
-                products && products.length > 0 ? (
-                    <div className='grid grid-cols-3 gap-8'>
+                allProducts && allProducts.length > 0 ? (
+                    <div className='grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-8'>
                         {
-                            (search.length > 0 ? search : products).map((item, index) =>
-                                <div key={index} className="max-w-[300px] space-y-4 rounded-lg bg-white p-6 shadow-lg md:w-[300px] dark:bg-[#18181B]">
+                            (search.length > 0 ? search : allProducts).map((item, index) =>
+                                <div key={index} className="md:max-w-[300px] space-y-4 my-4 md:my-0 rounded-lg bg-white p-6 shadow-lg md:w-[300px] dark:bg-[#18181B]">
                                     <img width={400} height={400} className="h-[275px] w-[350px] rounded-lg object-cover" src={item?.image} alt="card  img" />
                                     <div className="grid gap-2">
-                                        <h1 className="text-lg font-semibold ">{item.name}</h1>
+                                        <h1 className="text-xs md:text-sm font-semibold ">{item.name}</h1>
                                         <div className='flex flex-row justify-evenly'>
-                                            <h1 className="text-lg font-semibold flex flex-row justify-center items-center gap-1"><span><BiSolidCategory /></span><span>{item.category}</span></h1>
-                                            <h1 className="text-lg font-semibold flex flex-row justify-center items-center gap-1"><span><SiBrandfolder /></span><span>{item.brand}</span></h1>
+                                            <h1 className="text-xs md:text-sm font-semibold flex flex-row justify-center items-center gap-1"><span><BiSolidCategory /></span><span>{item.category}</span></h1>
+                                            <h1 className="text-xs md:text-sm font-semibold flex flex-row justify-center items-center gap-1"><span><SiBrandfolder /></span><span>{item.brand}</span></h1>
                                         </div>
-                                        <p className="text-sm text-gray-500 dark:text-white/60">{item.description}</p>
+                                        <p className="text-xs text-gray-500 dark:text-white/60">{item.description}</p>
                                         {/* <p className="text-sm text-gray-500 dark:text-white/60">This is a brief description of the product. It highlights the key features and benefits.</p> */}
-                                        <div className="text-lg font-semibold">${item.price}</div>
+                                        <div className="text-xs md:text-sm font-semibold">${item.price}</div>
                                     </div>
-                                    <div className="flex gap-4">
+                                    <div className="flex gap-4 text-[10px] md:text-sm">
                                         <CartButton id={item._id} item={item}></CartButton>
                                         {/* <button className="rounded-lg bg-slate-800 px-6 py-2 text-[12px] font-semibold text-white duration-300 hover:bg-slate-950 sm:text-sm md:text-base">Add to Cart</button> */}
                                         <Link to={`/productDetails/${item._id}`}>
@@ -89,12 +108,16 @@ const ProductBar = ({ products, noProducts }) => {
                         }
                     </div>
                 ) : (
-                    <div className="text-center text-lg font-semibold text-gray-500 dark:text-white/60">
+                    <div className="text-center text-xs md:text-smfont-semibold text-gray-500 dark:text-white/60">
                         {/* {noProducts} */}
                         No Products Available
                     </div>
                 )
             }
+            <Pagination pageNumber={pageNumber} totalPages={totalPages} setPageNumber={setPageNumber} />
+            {/* Pagination controls */}
+
+
         </div>
     );
 };

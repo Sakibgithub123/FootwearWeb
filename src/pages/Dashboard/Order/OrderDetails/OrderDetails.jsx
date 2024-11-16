@@ -54,36 +54,36 @@ const OrderDetails = () => {
     }
     return (
         <div className='ml-3'>
-            <h1 className='text-left text-stone-950 p-2 text-2xl font-bold border border-b-base-200 border-t-0'>Order Details: #Order-78414</h1>
-            <div className='flex flex-row space-x-4 mt-4'>
-                <div className='flex flex-row gap-2 bg-emerald-100 items-center p-3 rounded-lg w-3/12 border border-green-400'>
+            <h1 className='text-left text-stone-950 p-2 text-sm md:text-2xl font-bold border border-b-base-200 border-t-0'>Order Details: #Order-78414</h1>
+            <div className='flex flex-col justify-center items-center space-y-4 md:space-y-0 md:flex-row md:space-x-4 mt-4'>
+                <div className='flex flex-row  gap-2 bg-emerald-100 items-center p-3 rounded-lg w-full md:w-3/12 border border-green-400'>
                     <FaCartArrowDown className='text-emerald-400 text-4xl' />
                     <div className='text-emerald-950 text-left'>
-                        <h3 className='text-lg'>Order Created at</h3>
+                        <h3 className='text-sm md:text-lg'>Order Created at</h3>
                         <p className='text-xs'>{orderDetails.date}</p>
                         {/* <p className='text-xs'>16/03/2021 at 04:23 PM</p> */}
                     </div>
                 </div>
-                <div className='flex flex-row gap-2  items-center bg-rose-100  w-3/12 p-3 rounded-lg w-3/12 border border-rose-400'>
+                <div className='flex flex-row gap-2  items-center bg-rose-100  p-3 rounded-lg w-full md:w-3/12 border border-rose-400'>
                     <FaUserCog className='text-rose-400 text-4xl' />
                     <div className='text-rose-950 text-left'>
-                        <h3 className='text-lg'>Name</h3>
+                        <h3 className='text-sm md:text-lg'>Name</h3>
                         {/* <p className='text-xs'>Gabrielle</p> */}
                         <p className='text-xs'>{orderDetails.name}</p>
                     </div>
                 </div>
-                <div className='flex flex-row gap-2  items-center bg-amber-100 border border-amber-400 w-3/12 p-3 rounded-lg w-3/12 border border-amber-400' >
+                <div className='flex flex-row gap-2  items-center bg-amber-100 border border-amber-400 w-full md:w-3/12 p-3 rounded-lg' >
                     <MdEmail className='text-amber-400 text-4xl' />
                     <div className='text-amber-950 text-left'>
-                        <h3 className='text-lg'>Email</h3>
+                        <h3 className='text-sm md:text-lg'>Email</h3>
                         {/* <p className='text-xs'>gabrielle.db@gmail.com</p> */}
                         <p className='text-xs'>{orderDetails.email}</p>
                     </div>
                 </div>
-                <div className='flex flex-row gap-2  items-center bg-cyan-100 w-3/12 p-3 rounded-lg w-3/12 border border-cyan-400'>
+                <div className='flex flex-row gap-2  items-center bg-cyan-100  p-3 rounded-lg w-full md:w-3/12 border border-cyan-400'>
                     <MdPhoneInTalk className='text-cyan-400 text-4xl' />
                     <div className='text-cyan-950 text-left'>
-                        <h3 className='text-lg'>Contact No</h3>
+                        <h3 className='text-sm md:text-lg'>Contact No</h3>
                         {/* <p className='text-xs'>202-906-12354</p> */}
                         <p className='text-xs'>{orderDetails.phone}</p>
                     </div>
@@ -93,8 +93,8 @@ const OrderDetails = () => {
             <div className='grid grid-cols-1 md:grid-cols-3 gap-8 my-10'>
                 <div className='bg-base-200 text-left p-3 rounded'>
                     <div className='mb-2 flex justify-between  '>
-                        <span className='text-base text-stone-950 font-bold'>Delivery Address</span>
-                        <span className='text-sm text-stone-400'>Edit</span>
+                        <span className='text-sm md:text-base text-stone-950 font-bold'>Delivery Address</span>
+                        <span className='text-[10px] md:text-sm text-stone-400'>Edit</span>
                     </div>
                     <div className='py-1 '>
                         <span className='text-xs text-stone-800 font-medium'>Block Number:</span>
@@ -120,8 +120,8 @@ const OrderDetails = () => {
                 </div>
                 <div className='bg-xs-200 text-left p-3 rounded'>
                     <div className='mb-2 flex justify-between'>
-                        <span className='text-base text-stone-950 font-bold'>Billing Address</span>
-                        <span className='text-sm text-stone-400'>Edit</span>
+                        <span className='text-sm md:text-base text-stone-950 font-bold'>Billing Address</span>
+                        <span className='text-[10px] md:text-sm text-stone-400'>Edit</span>
                     </div>
                     <div className='py-1 '>
                         <span className='text-xs text-stone-800 font-medium'>Block Number:</span>
@@ -147,8 +147,8 @@ const OrderDetails = () => {
                 </div>
                 <div className='bg-xs-200 text-left p-3 rounded'>
                     <div className='mb-2 flex justify-between'>
-                        <span className='text-base text-stone-950 font-bold'>Invoice Deatil</span>
-                        <span className='text-sm text-stone-400'>Download</span>
+                        <span className='text-sm md:text-base text-stone-950 font-bold'>Invoice Deatil</span>
+                        <span className='text-[10px] md:text-sm text-stone-400'>Download</span>
                     </div>
                     <div className='py-1 '>
                         <span className='text-xs text-stone-800 font-medium'>Number:</span>
@@ -167,64 +167,64 @@ const OrderDetails = () => {
             </div>
             {/* table  */}
             <div className='ml-3 mt-4'>
-                <div className="overflow-x-auto bg-base-200 p-4 rounded">
-                    <h1 className='text-left font-medium text-stone-700 py-2 text-xl'>Order Summery</h1>
+                <div className="overflow-x-auto bg-base-200 md:p-4 rounded">
+                    <h1 className='text-left font-medium text-stone-700 px-2 md:px-0 py-2 text-sm md:text-xl'>Order Summery</h1>
                     <table className="min-w-[90%] shadow-md border mx-auto border-gray-100 mt-6">
                         <thead>
                             <tr className="bg-orange-400 text-white">
-                                <th className="py-4 px-6 text-sm  border-b">PRODUCT IMAGE</th>
-                                <th className="py-4 px-6 text-sm  border-b">PRODUCT NAME</th>
-                                <th className="py-4 px-6 text-sm  border-b">QUANTITY</th>
-                                <th className="py-4 px-6 text-sm  border-b">PRICE</th>
+                                <th className="md:py-2 md:px-3 text-[10px] md:text-sm ">PRODUCT IMAGE</th>
+                                <th className="md:py-2 md:px-3 text-[10px] md:text-sm ">PRODUCT NAME</th>
+                                <th className="md:py-2 md:px-3 text-[10px] md:text-sm ">QUANTITY</th>
+                                <th className="md:py-2 md:px-3 text-[10px] md:text-sm ">PRICE</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {/* <tr className="hover:bg-gray-50 border-b transition duration-300">
+                            {/* <tr className="hover:bg-gray-50 transition duration-300">
                                 <td>
                                     <td className="py-4 px-4 flex justify-start">
                                         <img src="https://source.unsplash.com/64x64/?microphone" alt="table navigate ui" className="h-16 w-16 object-cover bg-gray-300" />
                                     </td>
                                 </td>
-                                <td className="py-4 px-6 border-b text-sm font-extraLight">Oculus VR
+                                <td className="md:py-2 md:px-3 text-[10px] md:text-sm font-extraLight">Oculus VR
                                     Pr-1204</td>
-                                <td className="py-4 px-6 border-b text-sm font-extraLight">1</td>
-                                <td className="py-4 px-6 border-b text-sm font-extraLight">$149.00</td>
+                                <td className="md:py-2 md:px-3 text-[10px] md:text-sm font-extraLight">1</td>
+                                <td className="md:py-2 md:px-3 text-[10px] md:text-sm font-extraLight">$149.00</td>
                             </tr> */}
                             {
                                 orderDetails?.cart?.map((item, index) => (
-                                    <tr key={index} className="hover:bg-gray-50 border-b transition duration-300">
-                                            <td className="py-4 px-6 text-xs flex justify-center ">
+                                    <tr key={index} className="hover:bg-gray-50 transition duration-300">
+                                            <td className="md:py-2 md:px-3 text-xs flex justify-center ">
                                                 <img
                                                     src={item?.image}
                                                     alt="table navigate ui"
-                                                    className="h-16 w-16 object-cover bg-gray-300 text-center"
+                                                    className="h-8 w-8 md:h-16 md:w-16 object-cover bg-gray-300 text-center"
                                                 />
                                             </td>
-                                        <td className="py-4 px-6 border-b text-xs font-extraLight">{item.name}</td>
-                                        <td className="py-4 px-6 border-b text-xs font-extraLight">
+                                        <td className="md:py-2 md:px-3 text-xs font-extraLight">{item.name}</td>
+                                        <td className="md:py-2 md:px-3 text-xs font-extraLight">
                                             {orderDetails?.quantities?.[index]}
                                         </td>
-                                        <td className="py-4 px-6 border-b text-xs font-extraLight">${item.price}</td>
+                                        <td className="md:py-2 md:px-3 pr-3 text-xs font-extraLight">${item.price}</td>
                                     </tr>
                                 ))
                             }
                         </tbody>
                     </table>
-                    <div className='flex justify-end mr-12 text-xs '>
-                        <div className='order-last w-5/12 border space-y-4 p-4  border-t-0 border-r-0 border-b-0'>
-                            <div className='flex justify-between'>
+                    <div className='flex justify-end md:mr-20 text-xs '>
+                        <div className='order-last md:w-5/12 border space-y-4 p-2 md:p-4  border-t-0 border-r-0 border-b-0'>
+                            <div className='flex justify-between space-x-4 md:space-x-0'>
                                 <span className='text-start font-light text-stone-600'>Subtotal Price:</span>
                                 <span className='text-end mr-6'>${orderDetails?.totalPrice}</span>
                             </div>
-                            <div className='flex justify-between'>
+                            <div className='flex justify-between space-x-4 md:space-x-0'>
                                 <span className='text-start font-light text-stone-600'>Shipping Cost (+):</span>
                                 <span className='text-end mr-6'>$12.00</span>
                             </div>
-                            <div className='flex justify-between'>
+                            <div className='flex justify-between space-x-4 md:space-x-0'>
                                 <span className='text-start font-light text-stone-600'>Tax(18%):</span>
                                 <span className='text-end mr-6'>$198.00</span>
                             </div>
-                            <div className='flex justify-between border border-l-0 border-r-0 border-b-0'>
+                            <div className='flex justify-between space-x-4 md:space-x-0 border border-l-0 border-r-0 border-b-0'>
                                 <span className='text-start font-normal text-stone-800'>Total Payable:</span>
                                 {/* <span className='text-end mr-6'>$1296.00</span> */}
                                 <span className='text-end mr-6'>${total}</span>
@@ -234,20 +234,20 @@ const OrderDetails = () => {
                 </div>
             </div>
             {/* status order  */}
-            <div className='ml-3 mt-4 flex justify-end text-sm'>
-                <div className='w-6/12 font-medium bg-base-200 p-4 rounded'>
-                    <h1 className='text-left text-stone-700 py-2 text-xl'>Status Orders</h1>
-                    <form onSubmit={handleSubmit(onSubmit)} className='space-y-1 text-sm'>
+            <div className='ml-3 mt-4 flex justify-end text-[10px] md:text-sm'>
+                <div className='md:w-6/12 font-medium bg-base-200 p-4 rounded'>
+                    <h1 className='text-left text-stone-700 py-2 text-sm md:text-xl'>Status Orders</h1>
+                    <form onSubmit={handleSubmit(onSubmit)} className='space-y-1 text-[10px] md:text-sm'>
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Order ID</span>
+                                <span className="label-text text-[10px] md:text-sm">Order ID</span>
                             </div>
                             <input {...register('orderId', { required: true })} type="text" placeholder="Type here" className="py-1 px-2 rounded border border-base-300 w-full" />
                             {errors.orderId?.type === "required" && (<p role="alert">Order Id is required</p>)}
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Order Status</span>
+                                <span className="label-text text-[10px] md:text-sm">Order Status</span>
                             </div>
                             <select name="orderStatus"
                                 {...register('status', { required: true })}
@@ -261,14 +261,14 @@ const OrderDetails = () => {
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Quantity</span>
+                                <span className="label-text text-[10px] md:text-sm">Quantity</span>
                             </div>
                             <input {...register('quantity', { required: true })} type="text" name='quantity' placeholder="Type here" className="py-1 px-2 rounded border border-base-300 w-full" />
                             {errors.quantity?.type === "required" && (<p role="alert">Quantity is required</p>)}
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Order Transection</span>
+                                <span className="label-text text-[10px] md:text-sm">Order Transection</span>
                             </div>
                             <select
                                 {...register('orderTransection', { required: true })}
@@ -282,7 +282,7 @@ const OrderDetails = () => {
                         </label>
                         <label className="form-control w-full">
                             <div className="label">
-                                <span className="label-text">Comment</span>
+                                <span className="label-text text-[10px] md:text-sm">Comment</span>
                             </div>
                             <textarea
                                 {...register('comment', { required: true })}
@@ -292,8 +292,8 @@ const OrderDetails = () => {
                             </textarea>
                             {errors.comment?.type === "required" && (<p role="alert">Comment is required</p>)}
                         </label>
-                        <div className='text-start'>
-                            <button className='py-2 px-4 bg-orange-400 rounded text-base-200'>Submit</button>
+                        <div className='text-end'>
+                            <button className='py-2 px-4 text-[10px] md:text-sm bg-orange-400 rounded text-sm md:text-base-200'>Submit</button>
                         </div>
                     </form>
                 </div>

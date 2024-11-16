@@ -22,13 +22,19 @@ const AdminHeader = () => {
 
     }
     return (
-        <div className='text-right'>
+        <div className='flex justify-end'>
+            {/* <button
+                onClick={toggleSidebar}
+                className="fixed top-4 left-4 z-20 p-2 bg-blue-500 text-white rounded-lg md:hidden"
+            >
+                ☰ Menu
+            </button> */}
             <div className='flex flex-row gap-2 space-x-reverse  items-center justify-end my-4'>
                 <IoMdNotifications className='text-xl text-orange-500' />
                 <div>
-                    <h3 className='text-base text-stone-800 font-semibold'>{userData?.name}</h3>
+                    <h3 className='text-xs md:text-base text-stone-800 font-semibold'>{userData?.name}</h3>
                     <div className="dropdown dropdown-bottom dropdown-end">
-                    <p tabIndex={0} role="button" className='text-sm text-stone-800 text-orange-300'>Admin Profile</p>
+                    <p tabIndex={0} role="button" className='text-[10px] md:text-sm text-stone-800 text-orange-300'>Admin Profile</p>
                         <ul tabIndex={0} className="dropdown-content  menu text-center bg-base-100 rounded-box z-[1] w-32 p-2 shadow">
                             <li><Link to={`/dashboard/user/profile/${email}`}>Profile</Link></li>
                             <li onClick={handleLogout}><Link>Log Out</Link></li>
@@ -37,13 +43,13 @@ const AdminHeader = () => {
                 </div>
                 <div className="relative">
                     <img
-                        width={500}
-                        height={500}
-                        className="size-10 rounded-full bg-slate-500 object-cover"
+                        // width={500}
+                        // height={500}
+                        className="size-10 h-6 w-6  md:h-12 md:w-12 rounded-full bg-slate-500 object-cover"
                         src={userData?.image}
                         alt="avatar navigate ui"
                     />
-                    <span className="absolute bottom-[2px] right-0 size-3 rounded-full border-[2px] border-white bg-green-500"></span>
+                    <span className="absolute bottom-[2px] right-0 size-2 md:size-3 rounded-full border-[2px] border-white bg-green-500"></span>
                 </div>
 
             </div>
